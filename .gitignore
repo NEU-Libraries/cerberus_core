@@ -1,3 +1,10 @@
+# OSX specific overrides
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Rails specific ignores
 .bundle/
 log/*.log
 pkg/
