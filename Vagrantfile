@@ -13,10 +13,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "chef/centos-6.5" 
 
   # Forward default rails development server port
-  config.vm.network :forwarded_port, guest: 3000, host: 3000
+  config.vm.network :forwarded_port, guest: 3000, host: 3000, auto_correct: true
 
   # Forward local fedora/solr instances on this port
-  config.vm.network :forwarded_port, guest: 8983, host: 8983
+  config.vm.network :forwarded_port, guest: 8983, host: 8983, auto_correct: true
 
   # If true, then any SSH connections made will enable agent forward.
   # Default value: false
@@ -39,10 +39,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "off"]
   end
 
-  # Runs configuration required to get the dummy application up and going.
+  # Runs configuration required to get the dummy application up and going so that 
+  # we can test what we're doing. 
   config.vm.provision "shell", path: "spec/dummy/script/vagrant_provisioning.sh", privileged: false
 
-  config.vm.synced_folder ".", "home/vagrant/drs_core", nfs: true 
+  config.vm.synced_folder ".", "/home/vagrant/drs_core", nfs: true 
 
-  config.vm.network "private_network", ip: "192.168.50.5"
+  config.vm.network "private_network", ip: "192.168.3.3"
 end
