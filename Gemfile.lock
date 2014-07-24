@@ -228,6 +228,7 @@ PLATFORMS
 DEPENDENCIES
   drs_core!
   hydra-head (= 6.3.3)
+  jettywrapper
   jquery-rails
   rspec
   sqlite3
