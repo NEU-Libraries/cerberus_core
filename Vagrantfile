@@ -13,10 +13,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "chef/centos-6.5" 
 
   # Forward default rails development server port
-  config.vm.network :forwarded_port, guest: 3000, host: 3000, auto_correct: true
+  config.vm.network :forwarded_port, guest: 3000, host: 3001, auto_correct: true
 
   # Forward local fedora/solr instances on this port
-  config.vm.network :forwarded_port, guest: 8983, host: 8983, auto_correct: true
+  config.vm.network :forwarded_port, guest: 8983, host: 8984, auto_correct: true
 
   # If true, then any SSH connections made will enable agent forward.
   # Default value: false
