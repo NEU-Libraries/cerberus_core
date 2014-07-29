@@ -60,6 +60,10 @@ module Dummy
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Squash the warning w.r.t an invalid locale being set.  Don't care for the purposes
+    # of this little test app.
+    config.i18n.enforce_available_locales = false
   end
 end
 
