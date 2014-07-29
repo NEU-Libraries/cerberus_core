@@ -62,4 +62,22 @@ describe TestPropertiesDatastream do
       end
     end
   end
+
+  describe "Extended Functionality:" do 
+    describe "Test attribute term" do  
+      it "exists and can be set + read" do 
+        properties.test_attribute = "test"
+        expect(properties.test_attribute).to match_array(["test"])
+      end
+    end
+
+    describe "get depositor" do 
+      it "fetches the first defined depositor" do 
+        expect(properties.get_depositor).to eq(nil) 
+
+        properties.depositor = "emp:111" 
+        expect(properties.get_depositor).to eq("emp:111")
+      end
+    end
+  end
 end
