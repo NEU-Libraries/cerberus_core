@@ -9,7 +9,12 @@ module DrsCore::CoreRecord
   included do 
     before_destroy :destroy_content_objects
 
-    @content_classes = []
+    CONTENT_CLASSES = nil #Add an array of content class names here
+
+    has_metadata name: "DC", type: DrsCore::Datastreams::NortheasternDublinCoreDatastream
+    has_metadata name: "rightsMetadata", type: DrsCore::Datastreams::ParanoidRightsDatastream
+    has_metadata name: "properties", type: DrsCore::Datastreams::DrsPropertiesDatastream
+    has_metadata name: "mods", type: DrsCore::Datastreams::NuModsDatastream
 
     # Every CoreRecord class should specify an array of model names
     # as strings for the content objects that can exist off this CoreRecord
@@ -17,14 +22,14 @@ module DrsCore::CoreRecord
     # a CoreRecord class that has AudioFile and VideoFile content object children
     # would specify @content_classes = ["AudioFile", "VideoFile"]
     def self.content_classes
-      @content_classes 
+      CONTENT_CLASSES 
     end
   end
 
   # Fetches all content objects that are attached to this core record (using solr) 
   # and returns them cast to their fedora model objects
   def content_objects
-    a = self.content_classes
+    a = self.class.content_classes
 
     a.inject! { |base, str| base + "OR \"#{str}\""}
     models = "active_fedora_model_ssi:(#{a})"
