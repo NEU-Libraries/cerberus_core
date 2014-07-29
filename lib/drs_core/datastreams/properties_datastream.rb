@@ -7,8 +7,8 @@ module DrsCore::Datastreams
   class PropertiesDatastream < ActiveFedora::OmDatastream
     set_terminology do |t|
       t.root(:path=>"fields" )
-      # This is where we put the user id of the object depositor -- impacts permissions/access controls
       t.parent_id :index_as=>[:stored_searchable]
+      # This is where we put the user id of the object depositor -- impacts permissions/access controls
       t.depositor :index_as=>[:stored_searchable]
       t.thumbnail_list :index_as=>[:stored_searchable]
       t.canonical  :index_as=>[:stored_searchable]
@@ -21,9 +21,6 @@ module DrsCore::Datastreams
       end
       builder.doc
     end
-
-    DELEGATES = [:in_progress?, :tag_as_in_progress, :tag_as_completed,
-                 :canonize, :uncanonize, :canonical?]
 
     # Checks if the Fedora object is in progress, indicating
     # that the system must do additional work before it can be 
