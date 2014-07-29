@@ -48,4 +48,16 @@ describe DrsCore::Datastreams::PropertiesDatastream do
       properties.thumbnail_list.should =~ ["path/to/obj?dsid=3"]
     end
   end
+
+  describe "Parent id" do
+
+    it "starts empty" do 
+      expect(properties.parent_id).to eq([])
+    end
+
+    it "can be assigned a single value" do 
+      properties.parent_id = "test:111" 
+      expect(properties.parent_id).to eq(["test:111"]) 
+    end
+  end 
 end
