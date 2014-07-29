@@ -10,10 +10,10 @@ module DrsCore::ContentObject
   include Hydra::ModelMethods
 
   included do 
-    has_metadata name: 'DC', type: DrsCore::Datastreams::NortheasternDublinCoreDatastream
-    has_metadata name: 'rightsMetadata', type: DrsCore::Datastreams::ParanoidRightsDatastream
-    has_metadata name: 'properties', type: DrsCore::Datastreams::DrsPropertiesDatastream 
-    has_file_datastream name: 'content', type: DrsCore::Datastreams::FileContentDatastream 
+    # has_metadata name: 'DC', type: DrsCore::Datastreams::NortheasternDublinCoreDatastream
+    # has_metadata name: 'rightsMetadata', type: DrsCore::Datastreams::ParanoidRightsDatastream
+    # has_metadata name: 'properties', type: DrsCore::Datastreams::DrsPropertiesDatastream 
+    # has_file_datastream name: 'content', type: DrsCore::Datastreams::FileContentDatastream 
   end
 
   def type_label

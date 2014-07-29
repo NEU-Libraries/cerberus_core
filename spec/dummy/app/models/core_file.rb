@@ -1,5 +1,5 @@
-class CoreFile < ActiveFedora::Base
-  include DrsCore::CoreRecord
+# class CoreFile < ActiveFedora::Base
+#   include DrsCore::CoreRecord
 
-  CONTENT_CLASSES = ["Wigwum", "Wumpus"]
-end
+#   CONTENT_CLASSES = ["Wigwum", "Wumpus"]
+# end

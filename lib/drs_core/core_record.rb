@@ -11,10 +11,10 @@ module DrsCore::CoreRecord
 
     CONTENT_CLASSES = nil #Add an array of content class names here
 
-    has_metadata name: "DC", type: DrsCore::Datastreams::NortheasternDublinCoreDatastream
-    has_metadata name: "rightsMetadata", type: DrsCore::Datastreams::ParanoidRightsDatastream
-    has_metadata name: "properties", type: DrsCore::Datastreams::DrsPropertiesDatastream
-    has_metadata name: "mods", type: DrsCore::Datastreams::NuModsDatastream
+    # has_metadata name: "DC", type: DrsCore::Datastreams::NortheasternDublinCoreDatastream
+    # has_metadata name: "rightsMetadata", type: DrsCore::Datastreams::ParanoidRightsDatastream
+    # has_metadata name: "properties", type: DrsCore::Datastreams::DrsPropertiesDatastream
+    # has_metadata name: "mods", type: DrsCore::Datastreams::NuModsDatastream
 
     # Every CoreRecord class should specify an array of model names
     # as strings for the content objects that can exist off this CoreRecord
