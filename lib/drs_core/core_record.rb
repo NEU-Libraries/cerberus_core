@@ -24,7 +24,7 @@ module DrsCore::CoreRecord
 
     # Default datastreams 
     has_metadata name: "DC", type: DrsCore::Datastreams::DublinCoreDatastream
-    has_metadata name: "mods", type: DrsCore::Datastreams::NuModsDatastream
+    has_metadata name: "mods", type: DrsCore::Datastreams::ModsDatastream
     has_metadata name: "properties", type: DrsCore::Datastreams::PropertiesDatastream
     has_metadata name: "rightsMetadata", type: DrsCore::Datastreams::ParanoidRightsDatastream
   end
