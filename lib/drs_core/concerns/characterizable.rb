@@ -19,7 +19,7 @@ module DrsCore::Concerns::Characterizable
                    :character_set, :markup_basis,
                    :markup_language, :duration, :bit_depth,
                    :sample_rate, :channels, :data_format, :offset,
-                   datastream: "fits", 
+                   datastream: "characterization", 
                    multiple: true
   end
 
