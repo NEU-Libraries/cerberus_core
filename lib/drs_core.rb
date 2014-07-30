@@ -15,4 +15,5 @@ module DrsCore
 
   require 'drs_core/concerns/paranoid_rights_validation'
   require 'drs_core/concerns/properties_datastream_delegations'
+  require 'drs_core/concerns/characterizable'
 end
