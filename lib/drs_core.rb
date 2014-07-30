@@ -8,6 +8,7 @@ module DrsCore
   require 'drs_core/datastreams/dublin_core_datastream'
   require 'drs_core/datastreams/mods_datastream'
   require 'drs_core/datastreams/paranoid_rights_datastream'
+  require 'drs_core/datastreams/fits_datastream'
 
   require 'drs_core/content_object'
   require 'drs_core/core_record'
