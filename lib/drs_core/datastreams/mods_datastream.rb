@@ -1,5 +1,5 @@
 module DrsCore::Datastreams
-  class NuModsDatastream < ActiveFedora::OmDatastream
+  class ModsDatastream < ActiveFedora::OmDatastream
     include OM::XML::Document
 
     stored_sortable = Solrizer::Descriptor.new(:string, :stored, :indexed)
