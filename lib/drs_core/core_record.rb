@@ -32,8 +32,9 @@ module DrsCore::CoreRecord
   # Fetches all content objects that are attached to this core record (using solr) 
   # and returns them cast to their fedora model objects
   def content_objects
-    a = self::CONTENT_CLASSES.inject { |base, str| base + "OR \"#{str}\""}
-    models = "active_fedora_model_ssi:(#{a})"
+    content = self.class::CONTENT_CLASSES.map{ |x| "\"#{x}\""}.join(" OR ")
+    models = "active_fedora_model_ssi:(#{content})"
+
     belongs_to_this = "is_part_of_ssim:\"info:fedora/#{self.pid}\""
 
     as = ActiveFedora::SolrService
