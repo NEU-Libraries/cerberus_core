@@ -1,3 +1,3 @@
-# class Wumpus < ActiveFedora::Base 
-#   include DrsCore::ContentObject
-# end
+class Wumpus < ActiveFedora::Base 
+  include DrsCore::ContentObject
+end

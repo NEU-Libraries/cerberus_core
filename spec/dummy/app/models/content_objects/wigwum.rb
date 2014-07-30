@@ -1,3 +1,3 @@
-# class Wigwum < ActiveFedora::Base 
-#   include DrsCore::ContentObject
-# end
+class Wigwum < ActiveFedora::Base 
+  include DrsCore::ContentObject
+end
