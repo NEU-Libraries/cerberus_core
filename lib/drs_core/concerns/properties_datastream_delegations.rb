@@ -8,5 +8,6 @@ module DrsCore::Concerns::PropertiesDatastreamDelegations
     delegate :canonize, to: "properties" 
     delegate :uncanonize, to: "properties" 
     delegate :canonical?, to: "properties" 
+    delegate :depositor, to: "properties", unique: true 
   end
 end
