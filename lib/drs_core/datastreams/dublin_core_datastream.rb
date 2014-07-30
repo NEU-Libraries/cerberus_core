@@ -13,15 +13,6 @@ module DrsCore::Datastreams
       t.subject(namespace_prefix: 'dc') 
     end
 
-    def to_solr(solr_doc = Hash.new)
-      super(solr_doc)
-
-      solr_doc["type_sim"] = self.nu_type.first unless self.nu_type.first.blank?
-
-      return solr_doc 
-    end
-
-
     def self.xml_template
       builder = Nokogiri::XML::Builder.new do |xml| 
         xml['oai_dc'].dc('xmlns:oai_dc' => 'http://www.openarchives.org/OAI/2.0/oai_dc/', 'xmlns:dc' => 'http://purl.org/dc/elements/1.1/', 'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance', 
