@@ -9,26 +9,30 @@ module DrsCore::CoreRecord
   included do
     include DrsCore::Concerns::ParanoidRightsValidation
     include Hydra::ModelMixins::RightsMetadata
+    include Hydra::ModelMethods
+
+    include DrsCore::Concerns::PropertiesDatastreamDelegations
 
     before_destroy :destroy_content_objects
-
-    CONTENT_CLASSES = nil #Add an array of content class names here
 
     # Every CoreRecord class should specify an array of model names
     # as strings for the content objects that can exist off this CoreRecord
     # under the constant CONTENT_CLASSES.  E.g. 
     # a CoreRecord class that has AudioFile and VideoFile content object children
-    # would specify @content_classes = ["AudioFile", "VideoFile"]
-    def self.content_classes
-      CONTENT_CLASSES 
-    end
+    # would specify CONTENT_CLASSES = ["AudioFile", "VideoFile"]
+    CONTENT_CLASSES = nil
+
+    # Default datastreams 
+    has_metadata name: "DC", type: DrsCore::Datastreams::DublinCoreDatastream
+    has_metadata name: "mods", type: DrsCore::Datastreams::NuModsDatastream
+    has_metadata name: "properties", type: DrsCore::Datastreams::PropertiesDatastream
+    has_metadata name: "rightsMetadata", type: DrsCore::Datastreams::ParanoidRightsDatastream
   end
 
   # Fetches all content objects that are attached to this core record (using solr) 
   # and returns them cast to their fedora model objects
   def content_objects
-
-    content_classes.inject! { |base, str| base + "OR \"#{str}\""}
+    a = self::CONTENT_CLASSES.inject { |base, str| base + "OR \"#{str}\""}
     models = "active_fedora_model_ssi:(#{a})"
     belongs_to_this = "is_part_of_ssim:\"info:fedora/#{self.pid}\""
 

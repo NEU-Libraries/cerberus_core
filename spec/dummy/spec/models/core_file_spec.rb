@@ -1,13 +1,28 @@
-# require 'spec_helper'
+require 'spec_helper'
+require "#{Rails.root}/spec/models/concerns/properties_datastream_delegations_spec"
 
-# describe CoreFile do 
+describe CoreFile do 
+  let(:x) { CoreFile.new }
 
-#   describe "datastreams" do 
-#     let (:x) { CoreFile.new() } 
+  after(:each) { x.destroy if x.persisted? } 
 
-#     it "are implemented with the proper keys" do 
-#       expected_keys = ["DC", "rightsMetadata", "properties", "mods", "RELS-EXT"]
-#       x.datastreams.keys.should =~ expected_keys
-#     end
-#   end
-# end
+  describe "Validations" do 
+
+    it "disallow save with public edit access" do 
+      x.edit_groups = ["public"]
+      expect { x.save! }.to raise_error(ActiveFedora::RecordInvalid) 
+    end
+
+    it "disallow save with registered edit access" do 
+      x.edit_groups = ["registered"]
+      expect { x.save! }.to raise_error(ActiveFedora::RecordInvalid) 
+    end
+
+    it "disallow save with depositor with no edit access" do 
+      x.properties.depositor = "Will Jackson" 
+      expect { x.save! }.to raise_error(ActiveFedora::RecordInvalid) 
+    end
+  end
+
+  it_behaves_like "A Properties Delegator"
+end
