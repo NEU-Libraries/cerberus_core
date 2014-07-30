@@ -2,6 +2,29 @@ require 'spec_helper'
 
 describe Wumpus do 
 
+  describe "ownership" do 
+    before(:all) do
+     @core = CoreFile.new 
+     @core.apply_depositor_metadata("Will") 
+     @core.save! 
+   end
+
+    let(:wumpus) { Wumpus.new } 
+    after(:each) { wumpus.destroy if wumpus.persisted? } 
+
+    it "defaults to no core file" do 
+      expect(wumpus.core_file).to be nil 
+    end
+
+    it "can be assigned" do 
+      wumpus.core_file = @core
+
+      expect(wumpus.core_file).to eq @core 
+    end
+
+    after(:all) { @core.destroy }
+  end
+
   describe "characterization" do 
     let(:wumpus) { Wumpus.new } 
 
