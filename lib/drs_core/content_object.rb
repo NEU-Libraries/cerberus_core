@@ -3,8 +3,12 @@ module DrsCore::ContentObject
   extend ActiveSupport::Concern
 
   included do
+    include DrsCore::Concerns::ParanoidRightsValidation
+
     include Hydra::ModelMixins::RightsMetadata
     include Hydra::ModelMethods
+
+    include DrsCore::Concerns::PropertiesDatastreamDelegations
 
     has_metadata name: 'DC', type: DrsCore::Datastreams::DublinCoreDatastream
     has_metadata name: 'rightsMetadata', type: DrsCore::Datastreams::ParanoidRightsDatastream
