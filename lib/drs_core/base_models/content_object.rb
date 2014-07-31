@@ -2,10 +2,8 @@
 # Content bearing objects should be fedora records that store some manner of file 
 # blob in the 'content' datastream, and that belong to a core record object that 
 # stores all relevant metadata for its various content objects. 
-module DrsCore::ContentObject
-  extend ActiveSupport::Concern
-
-  included do
+module DrsCore::BaseModels
+  class ContentObject < ActiveFedora::Base
     include Hydra::ModelMixins::RightsMetadata
     include Hydra::ModelMethods
 
@@ -17,13 +15,11 @@ module DrsCore::ContentObject
     has_metadata name: 'properties', type: DrsCore::Datastreams::PropertiesDatastream 
     has_metadata name: 'characterization', type: DrsCore::Datastreams::FitsDatastream
     has_file_datastream name: 'content', type: DrsCore::Datastreams::FileContentDatastream 
-  end
 
-  def type_label
-    self.class.name
-  end
+    def type_label
+      self.class.name
+    end
 
-  module ClassMethods
     # We assume in the logic for a core_record object that content objects point
     # at it using the is_part_of relationship.  Using this method to define core record
     # relationships enforces that constraint. 
@@ -34,7 +30,7 @@ module DrsCore::ContentObject
     #   the model name cannot be inferred from rel_name.  E.g., if the rel_name is 
     #   :core_file, and it points at a class called CoreFile, this can be left set
     #   to nil
-    def relate_to_core_record(rel_name, rel_class = nil)
+    def self.relate_to_core_record(rel_name, rel_class = nil)
       if rel_class 
        belongs_to rel_name, :property => :is_part_of, :class => rel_class 
       else

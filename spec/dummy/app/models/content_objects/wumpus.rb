@@ -1,5 +1,3 @@
-class Wumpus < ActiveFedora::Base 
-  include DrsCore::ContentObject
-  
+class Wumpus < DrsCore::BaseModels::ContentObject
   relate_to_core_record(:core_file)
 end
