@@ -10,7 +10,9 @@ RSpec.shared_examples "A Properties Delegator" do
     expect(methods.all? { |x| delegator.respond_to? x }).to be true 
   end
 
-  it "does not forward depositor=" do 
-    expect(delegator.respond_to? :depositor=).to be false 
+  it "uses apply_depositor_metadata to run depositor=" do 
+    delegator.depositor = "test" 
+    expect(delegator.depositor).to eq("test") 
+    expect(delegator.edit_users).to include("test")
   end
 end

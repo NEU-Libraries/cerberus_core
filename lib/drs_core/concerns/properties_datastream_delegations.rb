@@ -8,6 +8,10 @@ module DrsCore::Concerns::PropertiesDatastreamDelegations
     delegate :canonize, to: "properties" 
     delegate :uncanonize, to: "properties" 
     delegate :canonical?, to: "properties" 
-    delegate :depositor, to: "properties", unique: true 
+    has_attributes :depositor, datastream: "properties", multiple: false
+
+    def depositor=(whatever) 
+      self.apply_depositor_metadata whatever 
+    end
   end
 end
