@@ -3,8 +3,6 @@ require "#{Rails.root}/spec/models/concerns/properties_datastream_delegations_sp
 require "#{Rails.root}/spec/models/concerns/paranoid_rights_validation_spec"
 
 describe CoreFile do 
-  
-
   describe "Content Objects" do 
     before :all do 
       @core    = CoreFile.new 
