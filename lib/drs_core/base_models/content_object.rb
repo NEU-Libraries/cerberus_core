@@ -9,6 +9,7 @@ module DrsCore::BaseModels
 
     include DrsCore::Concerns::PropertiesDatastreamDelegations
     include DrsCore::Concerns::Characterizable
+    include DrsCore::Concerns::Relatable
 
     has_metadata name: 'DC', type: DrsCore::Datastreams::DublinCoreDatastream
     has_metadata name: 'rightsMetadata', type: DrsCore::Datastreams::ParanoidRightsDatastream
@@ -31,11 +32,7 @@ module DrsCore::BaseModels
     #   :core_file, and it points at a class called CoreFile, this can be left set
     #   to nil
     def self.relate_to_core_record(rel_name, rel_class = nil)
-      if rel_class 
-       belongs_to rel_name, :property => :is_part_of, :class => rel_class 
-      else
-        belongs_to rel_name, :property => :is_part_of 
-      end
+      self.relation_asserter(:belongs_to, rel_name, :is_part_of, rel_class)
     end
   end
 end
