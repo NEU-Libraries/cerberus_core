@@ -1,3 +1,5 @@
+# Handles delegations to the properties datastream which are assumed
+# to be universally useful. 
 module DrsCore::Concerns::PropertiesDatastreamDelegations
   extend ActiveSupport::Concern 
 
@@ -10,6 +12,12 @@ module DrsCore::Concerns::PropertiesDatastreamDelegations
     delegate :canonical?, to: "properties" 
     has_attributes :depositor, datastream: "properties", multiple: false
 
+    # Overrides the depositor= delegation to ensure that
+    # #apply_depositor_metadata from Hydra::ModelMethods is 
+    # used instead. 
+    # ==== Attributes 
+    # * +whatever+ - The thing you wish to set as the depositor.  Is passed
+    #   straight to #apply_depositor_metadata, so look there to see behavior.
     def depositor=(whatever) 
       self.apply_depositor_metadata whatever 
     end

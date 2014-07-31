@@ -1,3 +1,7 @@
+# Implements delegations for/basic characterization method to use with
+# objects that have a content datastream.  Since characterization is slow
+# and will typically need to be implemented in a job that runs outside of
+# the response cycle no default callback is created. 
 module DrsCore::Concerns::Characterizable
   extend ActiveSupport::Concern 
 
@@ -23,6 +27,8 @@ module DrsCore::Concerns::Characterizable
                    multiple: true
   end
 
+  # Uses the extract_metadata method defined on FileDatastream to 
+  # run FITS characterization.
   def characterize 
     self.characterization.ng_xml = self.content.extract_metadata 
   end

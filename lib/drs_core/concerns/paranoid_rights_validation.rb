@@ -1,3 +1,6 @@
+# Including this module ensures that the validations specified by 
+# the paranoid rights datastream are actually run.  Note that this is 
+# included/not included as appropriate in core_record.rb/content_object.rb/etc. 
 module DrsCore::Concerns
   module ParanoidRightsValidation
     extend ActiveSupport::Concern 
