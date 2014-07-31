@@ -17,15 +17,17 @@ describe CoreFile do
 
       @wumpus  = Wumpus.new
       @wumpus.core_file = @core 
+      @wumpus.canonize
       @wumpus.save! 
 
       @wigwum2 = Wigwum.create 
     end
 
-    it "can be found" do 
+    it "can be found in various ways" do 
       expected = [@wigwum, @wumpus] 
 
       expect(@core.content_objects).to match_array expected 
+      expect(@core.canonical_object).to eq @wumpus
     end
 
     it "are destroyed on core record destruction" do 

@@ -32,15 +32,15 @@ module DrsCore::CoreRecord
   # Fetches all content objects that are attached to this core record (using solr) 
   # and returns them cast to their fedora model objects
   def content_objects
-    content = self.class::CONTENT_CLASSES.map{ |x| "\"#{x}\""}.join(" OR ")
-    models = "active_fedora_model_ssi:(#{content})"
-
-    belongs_to_this = "is_part_of_ssim:\"info:fedora/#{self.pid}\""
-
-    as = ActiveFedora::SolrService
-    query_result = as.query("#{models} AND #{belongs_to_this}", rows: 999)
-    assigned_lookup(query_result)
+    fedora_object_from_solr(content_object_query_result) 
   end 
+
+  # Fetches the canonical content object for this core record
+  def canonical_object 
+    all = content_object_query_result
+    obj = all.find { |x| x["canonical_tesim"] == ['yes'] } 
+    obj["active_fedora_model_ssi"].constantize.find(obj["id"])
+  end
 
   # Destroy every content object attached to this CoreRecord
   def destroy_content_objects
@@ -48,7 +48,18 @@ module DrsCore::CoreRecord
   end
 
   private 
-    def assigned_lookup(arry)
+
+    def content_object_query_result
+      content = self.class::CONTENT_CLASSES.map{ |x| "\"#{x}\""}.join(" OR ")
+      models = "active_fedora_model_ssi:(#{content})"
+
+      belongs_to_this = "is_part_of_ssim:\"info:fedora/#{self.pid}\""
+
+      as = ActiveFedora::SolrService
+      query_result = as.query("#{models} AND #{belongs_to_this}", rows: 999)
+    end
+
+    def fedora_object_from_solr(arry) 
       arry.map do |r| 
         r["active_fedora_model_ssi"].constantize.find(r["id"])
       end
