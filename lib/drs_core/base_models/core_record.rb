@@ -10,6 +10,7 @@ module DrsCore::BaseModels
     include Hydra::ModelMethods
 
     include DrsCore::Concerns::PropertiesDatastreamDelegations
+    include DrsCore::Concerns::Relatable
 
     before_destroy :destroy_content_objects
 
@@ -24,6 +25,10 @@ module DrsCore::BaseModels
     has_metadata name: "mods", type: DrsCore::Datastreams::ModsDatastream
     has_metadata name: "properties", type: DrsCore::Datastreams::PropertiesDatastream
     has_metadata name: "rightsMetadata", type: DrsCore::Datastreams::ParanoidRightsDatastream
+
+    def self.relate_to_parent_collection(rel_name, rel_class = nil)
+      self.relation_asserter(:belongs_to, rel_name, :is_member_of, rel_class)
+    end
 
     # Retrieves from Solr all objects that are content objects off this core record.
     # Does no additional processing beyond returning the query result as constructed
