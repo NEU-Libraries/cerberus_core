@@ -1,5 +1,5 @@
 class Wumpus < ActiveFedora::Base 
-  belongs_to :core_file, :property => :is_part_of
-
   include DrsCore::ContentObject
+  
+  relate_to_core_record(:core_file)
 end
