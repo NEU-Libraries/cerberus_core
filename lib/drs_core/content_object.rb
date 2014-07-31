@@ -19,4 +19,14 @@ module DrsCore::ContentObject
   def type_label
     self.class.name
   end
+
+  module ClassMethods
+    def relate_to_core_record(rel_name, rel_class = nil)
+      if rel_class 
+       belongs_to rel_name, :property => :is_part_of, :class => rel_class 
+      else
+        belongs_to rel_name, :property => :is_part_of 
+      end
+    end
+  end
 end
