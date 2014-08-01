@@ -14,6 +14,7 @@ module DrsCore
   require 'drs_core/concerns/properties_datastream_delegations'
   require 'drs_core/concerns/characterizable'
   require 'drs_core/concerns/relatable'
+  require 'drs_core/concerns/traversals'
 
   require 'drs_core/services/query_service'
 
