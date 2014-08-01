@@ -8,6 +8,17 @@ module DrsCore::Services
       self.class_name = class_name 
     end
 
+    def self.create_from_object(object) 
+      if object.class.name == "SolrDocument"
+        id = object["id"]
+        class_name = object["active_fedora_model_ssi"]
+
+        DrsCore::Services::QueryService.new(id, class_name) 
+      else
+        DrsCore::Services::QueryService.new(object.pid, object.class.name) 
+      end
+    end
+
     # Assuming a well formed graph of Projects/Collections/CoreRecords
     # Returns the immediate descendents of this pid and class name
     def get_children(opts = {})
