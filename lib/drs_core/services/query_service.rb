@@ -15,7 +15,19 @@ module DrsCore::Services
     end
 
     def get_descendents(opts = {}) 
-      recursive_query_with_models(:all, opts) 
+      opts = initialize_opts opts 
+
+      results = query_with_models(:all, :return_as => :query_result)
+
+      results.each do |r|
+        id    = r["id"]
+        model = r["active_fedora_model_ssi"]
+        qs    = QueryService.new(id, model)
+        more_kids = qs.query_with_models(:all, :return_as => :query_result)
+        results.push(*more_kids)
+      end
+
+      parse_return_statement(opts[:return_as], results)  
     end
 
     def get_child_records(opts = {})
@@ -23,14 +35,7 @@ module DrsCore::Services
     end
 
     def get_descendent_records(opts = {})
-      opts = initialize_opts opts 
-      qr = recursive_query_with_models(:all, :return_as => :query_result)
-
-      models = model_array(:records)
-
-      qr.keep_if { |r| models.include? r["active_fedora_model_ssi"] }
-
-      parse_return_statement(opts[:return_as], qr)
+      filter_descendent_query(:records, opts)
     end
 
     def get_child_collections(opts = {}) 
@@ -38,7 +43,7 @@ module DrsCore::Services
     end
 
     def get_descendent_collections(opts = {})
-      recursive_query_with_models(:collections, opts) 
+      filter_descendent_query(:collections, opts)
     end
 
     protected 
@@ -66,20 +71,15 @@ module DrsCore::Services
 
     private
 
-    def recursive_query_with_models(model_types, opts) 
-      opts = initialize_opts opts 
+    def filter_descendent_query(model_type, opts = {}) 
+      opts = initialize_opts opts
+      qr   = get_descendents(:return_as => :query_result) 
 
-      results = query_with_models(model_types, :return_as => :query_result)
+      models = model_array(model_type) 
 
-      results.each do |r|
-        id    = r["id"]
-        model = r["active_fedora_model_ssi"]
-        qs    = QueryService.new(id, model)
-        more_kids = qs.query_with_models(model_types, :return_as => :query_result)
-        results.push(*more_kids)
-      end
+      qr.keep_if { |r| models.include? r["active_fedora_model_ssi"] } 
 
-      parse_return_statement(opts[:return_as], results) 
+      parse_return_statement(opts[:return_as], qr) 
     end
 
     def initialize_opts(opts)
