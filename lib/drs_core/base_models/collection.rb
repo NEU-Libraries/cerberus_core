@@ -32,6 +32,31 @@ module DrsCore::BaseModels
       service.get_children opts
     end
 
+    def descendents(opts) 
+      service = DrsCore::Services::QueryService.new(self.pid, self.class.name)
+      service.get_descendents opts 
+    end
+
+    def records(opts) 
+      service = DrsCore::Services::QueryService.new(self.pid, self.class.name)
+      service.get_child_records opts 
+    end
+
+    def descendent_records(opts) 
+      service = DrsCore::Services::QueryService.new(self.pid, self.class.name) 
+      service.get_descendent_records opts 
+    end
+
+    def collections(opts) 
+      service = DrsCore::Services::QueryService.new(self.pid, self.class.name)
+      service.get_child_collections opts 
+    end
+
+    def descendent_collections(opts) 
+      service = DrsCore::Services::QueryService.new(self.pid, self.class.name) 
+      service.get_descendent_collections opts 
+    end
+
     def self.relate_to_parent_community(rel_name, rel_class = nil) 
       self.relation_asserter(:belongs_to, rel_name, :is_member_of, rel_class)
     end
