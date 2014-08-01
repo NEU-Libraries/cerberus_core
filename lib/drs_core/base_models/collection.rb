@@ -27,6 +27,11 @@ module DrsCore::BaseModels
     # E.g. Collection::FOLDER_CLASSES = ["Collection"]
     FOLDER_CLASSES      = []
 
+    def children(opts)
+      service = DrsCore::Services::QueryService.new(self.pid, self.class.name)
+      service.get_children opts
+    end
+
     def self.relate_to_parent_community(rel_name, rel_class = nil) 
       self.relation_asserter(:belongs_to, rel_name, :is_member_of, rel_class)
     end
