@@ -127,8 +127,8 @@ module DrsCore::Services
         records = const::CORE_RECORD_CLASSES 
       end
 
-      if check.call(:FOLDER_CLASSES, [:collections, :all])
-        folders = const::FOLDER_CLASSES 
+      if check.call(:COLLECTION_CLASSES, [:collections, :all])
+        folders = const::COLLECTION_CLASSES
       end
 
       return records + folders

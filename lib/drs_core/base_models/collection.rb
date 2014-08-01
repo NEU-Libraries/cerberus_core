@@ -24,9 +24,9 @@ module DrsCore::BaseModels
 
     # Records the model names for folder type classes that can have an instance
     # of this collection as their parent.  Typically this will be the model that
-    # FOLDER_CLASSES is being defined for.  
-    # E.g. Collection::FOLDER_CLASSES = ["Collection"]
-    FOLDER_CLASSES      = []
+    # COLLECTION_CLASSES is being defined for.  
+    # E.g. Collection::COLLECTION_CLASSES = ["Collection"]
+    COLLECTION_CLASSES      = []
 
     def self.relate_to_parent_community(rel_name, rel_class = nil) 
       self.relation_asserter(:belongs_to, rel_name, :is_member_of, rel_class)
