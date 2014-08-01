@@ -39,20 +39,64 @@ describe Kollection do
       @child_file.parent = @ancestor 
       @child_file.save!
 
+      @descendent_kol = Kollection.new()
+      @descendent_kol.depositor = "Will" 
+      @descendent_kol.parent_kollection = @child_kol 
+      @descendent_kol.save!
+
+      @descendent_file = CoreFile.new()
+      @descendent_file.depositor = "Will" 
+      @descendent_file.parent = @descendent_kol
+      @descendent_file.save!
+
       @random_file = CoreFile.new()
       @random_file.depositor = "Will" 
       @random_file.save! 
+
+      @random_kol  = Kollection.new()
+      @random_kol.depositor = "Will" 
+      @random_kol.save!
     end
 
-    it "can find its children" do 
+    it "can find children" do 
       expected = [@child_kol, @child_file] 
 
       expect(@ancestor.children(:return_as => :models)).to match_array expected 
     end
 
+    it "returns an empty array when no children exist" do 
+      expect(@random_kol.children(:return_as => :models)).to match_array [] 
+    end
+
+    it "can find children who are records" do 
+      expected  = [@child_file] 
+
+      expect(@ancestor.records(:return_as => :models)).to match_array expected
+    end
+
+    it "can find children who are collections" do 
+      expected = [@child_kol]
+      expect(@ancestor.collections(:return_as => :models)).to match_array expected
+    end
+
+    it "can find all descendents" do 
+      expected = [@child_kol, @child_file, @descendent_file, @descendent_kol]
+      expect(@ancestor.descendents(:return_as => :models)).to match_array expected 
+    end
+
+    it "can find all descendents who are records" do
+      expected = [@child_file, @descendent_file]
+      expect(@ancestor.descendent_records(:return_as => :models)).to match_array expected
+    end 
+
+    it "can find all descendents who are collections" do 
+      expected = [@child_kol, @descendent_kol]
+      expect(@ancestor.descendent_collections(:return_as => :models)).to match_array expected
+    end
+
     after(:all) do 
       @ancestor.destroy ; @child_kol.destroy ; @child_file.destroy
-      @random_file.destroy 
+      @random_file.destroy ; @descendent_kol.destroy ; @descendent_file.destroy  
     end
   end
 
