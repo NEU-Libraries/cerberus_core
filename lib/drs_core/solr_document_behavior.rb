@@ -1,5 +1,18 @@
 module DrsCore::SolrDocumentBehavior
+  extend ActiveSupport::Concern
   include DrsCore::Concerns::Traversals
+
+  module ClassMethods
+    def find_by_pid(pid) 
+      r = ActiveFedora::SolrService.query("id:\"#{pid}\"")
+      if r.first
+        SolrDocument.new(r.first) 
+      else
+        msg = "Item with id #{pid} not found in Solr"
+        raise DrsCore::PidNotFoundInSolrError, msg
+      end
+    end
+  end
 
   #-----------------------
   # Mods Datastream Stuff 

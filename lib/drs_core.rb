@@ -3,6 +3,8 @@ require 'hydra/head'
 require 'hydra/derivatives'
 
 module DrsCore
+  require 'exceptions'
+
   require 'drs_core/datastreams/properties_datastream'
   require 'drs_core/datastreams/file_content_datastream'
   require 'drs_core/datastreams/dublin_core_datastream'
