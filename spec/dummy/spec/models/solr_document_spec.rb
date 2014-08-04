@@ -94,6 +94,12 @@ describe SolrDocument do
       expect(doc.canonical?).to be true 
     end
 
+    it "allows us to read an object's parent id" do 
+      expect(doc.parent_id).to eq "" 
+      core_file.properties.parent_id = "blah" 
+      expect(doc.parent_id).to eq "blah" 
+    end 
+
     it "allows us to access the thumbnail list" do 
       thumbs = ["url1", "url2", "url3"]
       core_file.thumbnail_list = thumbs
