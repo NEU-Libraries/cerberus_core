@@ -22,4 +22,5 @@ module DrsCore
   require 'drs_core/base_models/core_record'
   require 'drs_core/base_models/collection'
   require 'drs_core/base_models/community'
+  require 'drs_core/base_models/solr_document'
 end

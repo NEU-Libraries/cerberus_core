@@ -19,7 +19,7 @@ module DrsCore::Services
     # that response hash pushed into a SolrDocument.  This object 
     # creates a new QueryService based on any of the three.
     def self.create_from_object(object) 
-      if (object.class.name == "SolrDocument") || object.is_a? Hash
+      if (object.class.name == "SolrDocument") || object.is_a?(Hash)
         id = object["id"]
         class_name = object["active_fedora_model_ssi"]
 
@@ -175,8 +175,10 @@ module DrsCore::Services
         results.map! do |result| 
           ActiveFedora::Base.find(result["id"], cast: true) 
         end
-      elsif opt == :solr_document
-        raise "Not implemented yet srry" 
+      elsif opt == :solr_documents
+        results.map! do |result| 
+          ::SolrDocument.new(result) 
+        end
       else
         raise "Invalid option passed" 
       end
