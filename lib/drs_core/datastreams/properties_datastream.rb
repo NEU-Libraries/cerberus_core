@@ -7,6 +7,10 @@ module DrsCore::Datastreams
   class PropertiesDatastream < ActiveFedora::OmDatastream
     set_terminology do |t|
       t.root(:path=>"fields" )
+      # Note that trying to delegate #parent_id to any object which defines 
+      # a relationship referred to as #parent will cause a collision.  Instead of 
+      # writing/to reading from the properties datastream it'll be trying to use 
+      # the *_id helpers provided by ActiveFedora.
       t.parent_id :index_as=>[:stored_searchable]
       # This is where we put the user id of the object depositor -- impacts permissions/access controls
       t.depositor :index_as=>[:stored_searchable]
