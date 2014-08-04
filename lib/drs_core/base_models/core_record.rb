@@ -1,9 +1,9 @@
-# This module implements the notion of a core record.  
-# Core records are fedora objects that hold 
-# metadata related to any number of content objects (defined in 
-# DrsCore::ContentObject) attached to them via the standard isPartOf
-# relationship.  Core records can belong to collections.
 module DrsCore::BaseModels
+  # This module implements the notion of a core record.  
+  # Core records are fedora objects that hold 
+  # metadata related to any number of content objects (defined in 
+  # DrsCore::ContentObject) attached to them via the standard isPartOf
+  # relationship.  Core records can belong to collections.
   class CoreRecord < ActiveFedora::Base
     include DrsCore::Concerns::ParanoidRightsValidation
     include Hydra::ModelMixins::RightsMetadata
