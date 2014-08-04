@@ -110,4 +110,26 @@ describe SolrDocument do
       expect(doc.thumbnail_list).to match_array thumbs
     end
   end
+
+  describe "Class method" do 
+
+    describe "find_by_pid" do
+
+      before(:all) { @wumpus = Wumpus.create }  
+
+      it "raises an error if the requested pid doesn't exist in Solr" do 
+        d = DrsCore::PidNotFoundInSolrError
+        expect{ SolrDocument.find_by_pid("blargh") }.to raise_error d 
+      end
+
+      it "returns a solr document" do 
+        pid = @wumpus.pid 
+        response = SolrDocument.find_by_pid(pid) 
+        expect(response.class).to be SolrDocument 
+        expect(response["id"]).to eq pid 
+      end
+
+      after(:all) { @wumpus.destroy } 
+    end
+  end
 end
