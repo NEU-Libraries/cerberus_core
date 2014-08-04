@@ -6,7 +6,6 @@ module DrsCore::Datastreams
     stored_sortable_date = Solrizer::Descriptor.new(:date, :stored, :indexed)
 
     set_terminology do |t|
-
       t.root(path: 'mods', 'xmlns:mods' => 'http://www.loc.gov/mods/v3', 'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance', 'xsi:schemaLocation' => 'http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd')
       t.title_info(path: 'titleInfo', namespace_prefix: 'mods'){
         t.title(path: 'title', namespace_prefix: 'mods', index_as: [:stored_searchable, stored_sortable])
