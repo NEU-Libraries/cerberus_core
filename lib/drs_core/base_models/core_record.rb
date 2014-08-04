@@ -11,6 +11,7 @@ module DrsCore::BaseModels
 
     include DrsCore::Concerns::PropertiesDatastreamDelegations
     include DrsCore::Concerns::Relatable
+    include DrsCore::Concerns::Traversals
 
     before_destroy :destroy_content_objects
 
@@ -34,33 +35,9 @@ module DrsCore::BaseModels
       self.relation_asserter(:belongs_to, rel_name, :is_member_of, rel_class)
     end
 
-    # Fetches all content objects that are attached to this core record (using solr)
-    # See Traversals for a description of available opts.
-    def content_objects(opts = {})
-      qs = DrsCore::Services::QueryService.new(self.pid, self.class.name)
-      qs.get_content_objects(opts) 
-    end 
-
-    # Fetches the canonical content object for this core record.
-    # Assumes that only one exists and will silently ignore any objects
-    # tagged as such beyond the first result found.  See Traversals for a
-    # description of available opts.
-    def canonical_object(opts = {})
-      qs = DrsCore::Services::QueryService.new(self.pid, self.class.name)
-      qs.get_canonical_object(opts)
-    end
-
     # Destroy every content object attached to this CoreRecord
     def destroy_content_objects
       content_objects(:return_as => :models).map { |x| x.destroy } 
     end
-
-    private
-      # :nodoc:
-      def fedora_object_from_solr(arry) 
-        arry.map do |r| 
-          r["active_fedora_model_ssi"].constantize.find(r["id"])
-        end
-      end
   end
 end
