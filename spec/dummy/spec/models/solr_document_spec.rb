@@ -93,5 +93,11 @@ describe SolrDocument do
       core_file.canonize
       expect(doc.canonical?).to be true 
     end
+
+    it "allows us to access the thumbnail list" do 
+      thumbs = ["url1", "url2", "url3"]
+      core_file.thumbnail_list = thumbs
+      expect(doc.thumbnail_list).to match_array thumbs
+    end
   end
 end
