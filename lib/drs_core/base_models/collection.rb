@@ -26,12 +26,20 @@ module DrsCore::BaseModels
     # of this collection as their parent.  Typically this will be the model that
     # COLLECTION_CLASSES is being defined for.  
     # E.g. Collection::COLLECTION_CLASSES = ["Collection"]
-    COLLECTION_CLASSES      = []
+    COLLECTION_CLASSES = []
 
+    # All querying logic assumes that collections are related to communities
+    # via the is_member_of relationship.  Using this method to define that
+    # relationship enforces this constraint.  See ContentObject for a 
+    # description of arguments.
     def self.relate_to_parent_community(rel_name, rel_class = nil) 
       self.relation_asserter(:belongs_to, rel_name, :is_member_of, rel_class)
     end
 
+    # All querying logic assumes that collections are related to their 
+    # parent collections via the is_member_of relationship.  Using this 
+    # method to define that relationship enforces this constraint.  See 
+    # ContentObject for a description of arguments.
     def self.relate_to_parent_collection(rel_name, rel_class = nil) 
       self.relation_asserter(:belongs_to, rel_name, :is_member_of, rel_class)
     end
