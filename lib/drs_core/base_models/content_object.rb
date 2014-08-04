@@ -1,7 +1,6 @@
-# This module implements the basic functionality for a content bearing object.
-# Content bearing objects should be fedora records that store some manner of file 
-# blob in the 'content' datastream, and that belong to a core record object that 
-# stores all relevant metadata for its various content objects. 
+# Implements the notion of a content object, which is a fedora object
+# holding a piece of content, e.g. a picture or an XML file.  Content objects
+# always belong to CoreRecord objects.
 module DrsCore::BaseModels
   class ContentObject < ActiveFedora::Base
     include Hydra::ModelMixins::RightsMetadata
