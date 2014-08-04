@@ -26,4 +26,12 @@ module DrsCore::Concerns::Traversals
   def descendent_collections(opts) 
     new_query.get_descendent_collections opts 
   end
+
+  def communities(opts) 
+    new_query.get_child_communities opts
+  end
+
+  def descendent_communities(opts)
+    new_query.get_descendent_communities opts
+  end
 end

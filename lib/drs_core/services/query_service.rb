@@ -57,6 +57,14 @@ module DrsCore::Services
       filter_descendent_query(:collections, opts)
     end
 
+    def get_child_communities(opts = {})
+      query_with_models(:communities, opts) 
+    end
+
+    def get_descendent_communities(opts = {}) 
+      filter_descendent_query(:communities, opts) 
+    end
+
     protected 
 
     def query_with_models(model_types, opts = {})
@@ -116,8 +124,9 @@ module DrsCore::Services
     def model_array(type)
       const = class_name.constantize 
 
-      records = []
-      folders = []
+      records     = []
+      folders     = []
+      communities = []
 
       check = Proc.new do |x, y| 
         const.constants.include?(x) && y.include?(type)
@@ -131,7 +140,11 @@ module DrsCore::Services
         folders = const::COLLECTION_CLASSES
       end
 
-      return records + folders
+      if check.call(:COMMUNITY_CLASSES, [:communities, :all])
+        communities = const::COMMUNITY_CLASSES 
+      end
+
+      return records + folders + communities
     end
   end
 end
