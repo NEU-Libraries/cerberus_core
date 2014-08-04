@@ -5,7 +5,8 @@ RSpec.shared_examples "A Properties Delegator" do
 
   it "forwards the expected methods" do 
     methods = [:in_progress?, :tag_as_in_progress, :tag_as_completed, 
-               :canonize, :uncanonize, :canonical?, :depositor]
+               :canonize, :uncanonize, :canonical?, :depositor, 
+               :thumbnail_list]
 
     expect(methods.all? { |x| delegator.respond_to? x }).to be true 
   end

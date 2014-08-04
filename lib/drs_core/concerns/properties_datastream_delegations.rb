@@ -11,6 +11,7 @@ module DrsCore::Concerns::PropertiesDatastreamDelegations
     delegate :uncanonize, to: "properties" 
     delegate :canonical?, to: "properties" 
     has_attributes :depositor, datastream: "properties", multiple: false
+    has_attributes :thumbnail_list, datastream: "properties", multiple: true
 
     # Overrides the depositor= delegation to ensure that
     # #apply_depositor_metadata from Hydra::ModelMethods is 
