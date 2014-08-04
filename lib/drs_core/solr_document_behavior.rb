@@ -38,7 +38,7 @@ module DrsCore::SolrDocumentBehavior
   end
 
   def in_progress?
-    unique_read("in_progress_tesim") == "yes" 
+    unique_read("in_progress_tesim") == "true" 
   end
 
   def canonical? 
@@ -62,15 +62,15 @@ module DrsCore::SolrDocumentBehavior
   end
 
   def read_people
-    Array(self[Ability.read_people_field])
+    Array(self[Ability.read_person_field])
   end
 
   def edit_groups
-    Array(self[Ability.edit_groups_field])
+    Array(self[Ability.edit_group_field])
   end
 
   def edit_people
-    Array(self[Ability.edit_people_field])
+    Array(self[Ability.edit_person_field])
   end
 
   def is_public?
@@ -91,6 +91,6 @@ module DrsCore::SolrDocumentBehavior
 
   def unique_read(field_name, default = '')
     val = Array(self[field_name]).first 
-    val.present? val ; default
+    val.present? ? val : default
   end
 end
