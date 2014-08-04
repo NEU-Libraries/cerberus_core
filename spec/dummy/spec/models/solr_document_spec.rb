@@ -42,6 +42,10 @@ describe SolrDocument do
     end
   end
 
+  describe "Mods metadata access" do 
+    pending "Figure out how people access the mods ds."
+  end
+
   describe "Rights metadata access" do 
     it "allows us to check an object's mass permissions" do
       expect(doc.is_private?).to be true
