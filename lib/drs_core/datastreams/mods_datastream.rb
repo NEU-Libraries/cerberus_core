@@ -7,7 +7,7 @@ module DrsCore::Datastreams
 
     set_terminology do |t|
 
-      t.root(path: 'mods', 'xmlns:drs' => 'https://repository.neu.edu/spec/v1', 'xmlns:mods' => 'http://www.loc.gov/mods/v3', 'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance', 'xsi:schemaLocation' => 'http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd')
+      t.root(path: 'mods', 'xmlns:mods' => 'http://www.loc.gov/mods/v3', 'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance', 'xsi:schemaLocation' => 'http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd')
       t.title_info(path: 'titleInfo', namespace_prefix: 'mods'){
         t.title(path: 'title', namespace_prefix: 'mods', index_as: [:stored_searchable, stored_sortable])
         t.non_sort(path: 'nonSort', namespace_prefix: 'mods', index_as: [:stored_searchable])
@@ -195,7 +195,7 @@ module DrsCore::Datastreams
 
     def self.xml_template
       builder = Nokogiri::XML::Builder.new do |xml|
-        xml.mods('xmlns:drs' => 'https://repository.neu.edu/spec/v1', 'xmlns:mods' => 'http://www.loc.gov/mods/v3', 'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
+        xml.mods('xmlns:mods' => 'http://www.loc.gov/mods/v3', 'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
                   'xsi:schemaLocation' => 'http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd'){
           xml.parent.namespace = xml.parent.namespace_definitions.find { |ns| ns.prefix=="mods" }
           xml.titleInfo {
