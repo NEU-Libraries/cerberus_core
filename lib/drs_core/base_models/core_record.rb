@@ -30,37 +30,23 @@ module DrsCore::BaseModels
       self.relation_asserter(:belongs_to, rel_name, :is_member_of, rel_class)
     end
 
-    # Retrieves from Solr all objects that are content objects off this core record.
-    # Does no additional processing beyond returning the query result as constructed
-    # by ActiveFedora::SolrService. 
-    def content_object_query_result
-      content = self.class::CONTENT_CLASSES.map{ |x| "\"#{x}\""}.join(" OR ")
-      models = "active_fedora_model_ssi:(#{content})"
-
-      belongs_to_this = "is_part_of_ssim:\"info:fedora/#{self.pid}\""
-
-      as = ActiveFedora::SolrService
-      query_result = as.query("#{models} AND #{belongs_to_this}", rows: 999)
-    end
-
-    # Fetches all content objects that are attached to this core record (using solr) 
-    # and returns them cast to their fedora model objects
-    def content_objects
-      fedora_object_from_solr(content_object_query_result) 
+    # Fetches all content objects that are attached to this core record (using solr)
+    def content_objects(opts = {})
+      qs = DrsCore::Services::QueryService.new(self.pid, self.class.name)
+      qs.get_content_objects(opts) 
     end 
 
     # Fetches the canonical content object for this core record.
     # Assumes that only one exists and will silently ignore any objects
     # tagged as such beyond the first result found. 
-    def canonical_object 
-      all = content_object_query_result
-      obj = all.find { |x| x["canonical_tesim"] == ['yes'] } 
-      obj["active_fedora_model_ssi"].constantize.find(obj["id"])
+    def canonical_object(opts = {})
+      qs = DrsCore::Services::QueryService.new(self.pid, self.class.name)
+      qs.get_canonical_object(opts)
     end
 
     # Destroy every content object attached to this CoreRecord
     def destroy_content_objects
-      content_objects.map { |x| x.destroy } 
+      content_objects(:return_as => :models).map { |x| x.destroy } 
     end
 
     private

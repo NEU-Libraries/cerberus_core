@@ -24,8 +24,8 @@ describe CoreFile do
     it "can be found in various ways" do 
       expected = [@wigwum, @wumpus] 
 
-      expect(@core.content_objects).to match_array expected 
-      expect(@core.canonical_object).to eq @wumpus
+      expect(@core.content_objects(:return_as => :models)).to match_array expected 
+      expect(@core.canonical_object(:return_as => :models)).to eq @wumpus
     end
 
     it "are destroyed on core record destruction" do 

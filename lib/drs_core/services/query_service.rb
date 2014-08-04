@@ -65,6 +65,26 @@ module DrsCore::Services
       filter_descendent_query(:communities, opts) 
     end
 
+    def get_content_objects(opts = {}) 
+      opts = initialize_opts opts
+      if self.class_name.constantize.constants.include? :CONTENT_CLASSES
+        models  = self.class_name.constantize::CONTENT_CLASSES
+        models  = construct_model_query(models)
+        part_of = "is_part_of_ssim:#{full_pid}"
+        query   = "#{models} AND #{part_of}"
+        results = ActiveFedora::SolrService.query(query, rows: 999)
+        parse_return_statement(opts[:return_as], results)
+      else
+        return [] 
+      end
+    end
+
+    def get_canonical_object(opts = {})
+      intermediate = get_content_objects(:return_as => :query_result) 
+      intermediate.keep_if { |x| x["canonical_tesim"] == ['yes'] }
+      parse_return_statement(opts[:return_as], intermediate).first
+    end
+
     protected 
 
     def query_with_models(model_types, opts = {})
@@ -72,10 +92,8 @@ module DrsCore::Services
       if models.any?
         opts = initialize_opts opts
 
-        models = models.map{ |x| "\"#{x}\"" }.join(" OR ")
-        models = "active_fedora_model_ssi:(#{models})"
+        models = construct_model_query(models)
 
-        full_pid         = "\"info:fedora/#{pid}\""
         member_of        = "is_member_of_ssim:#{full_pid}"
         affiliation_with = "has_affiliation_ssim:#{full_pid}"
 
@@ -89,6 +107,19 @@ module DrsCore::Services
     end
 
     private
+
+    def full_pid(param_pid = nil)
+      if param_pid
+        return "\"info:fedora/#{param_pid}\""
+      else
+        return "\"info:fedora/#{self.pid}\""
+      end
+    end
+
+    def construct_model_query(model_names)
+      models = model_names.map{|x|"\"#{x}\""}.join(" OR ")
+      return "active_fedora_model_ssi:(#{models})" 
+    end
 
     def filter_descendent_query(model_type, opts = {}) 
       opts = initialize_opts opts
