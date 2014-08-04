@@ -1,4 +1,6 @@
 module DrsCore::Datastreams
+  # Datastream for holding the results of FITS characterization, which can be run
+  # against FileContentDatastream datastreams via the Characterizable concern.
   class FitsDatastream < ActiveFedora::OmDatastream
     include OM::XML::Document
 
