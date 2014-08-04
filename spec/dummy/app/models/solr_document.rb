@@ -1,2 +1,4 @@
-class SolrDocument < DrsCore::BaseModels::SolrDocument
+class SolrDocument
+  include Blacklight::Solr::Document
+  include DrsCore::SolrDocumentBehavior
 end
