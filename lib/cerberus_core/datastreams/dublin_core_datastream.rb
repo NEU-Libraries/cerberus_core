@@ -1,4 +1,4 @@
-module DrsCore::Datastreams
+module CerberusCore::Datastreams
   # Implements the entire quite basic schema for Unqualified Dublin Core.
   class DublinCoreDatastream < ActiveFedora::OmDatastream
     include OM::XML::Document

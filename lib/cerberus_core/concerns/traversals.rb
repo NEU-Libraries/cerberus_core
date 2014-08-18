@@ -9,12 +9,12 @@
 #   retrieved by ActiveFedora::SolrService.query().  Other options are
 #   :models, which casts each result to its fedora object model, and 
 #   :solr_document, which returns an array of SolrDocuments. 
-module DrsCore::Concerns::Traversals
+module CerberusCore::Concerns::Traversals
   # Creates a new QueryService object from the given object. 
   # Ought to know how to create from a fedora level model, 
   # a SolrDocument, or a raw response hash.  
   def new_query
-    DrsCore::Services::QueryService.create_from_object(self)
+    CerberusCore::Services::QueryService.create_from_object(self)
   end
 
   # Fetch all children (immediate descendents) of this fedora object.

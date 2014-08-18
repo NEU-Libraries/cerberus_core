@@ -1,4 +1,4 @@
-module DrsCore::Datastreams
+module CerberusCore::Datastreams
   # Basic Hydra rights metadata datastream with the addition of 
   # some generally sensible extra validation.
   class ParanoidRightsDatastream < Hydra::Datastream::RightsMetadata

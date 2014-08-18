@@ -1,17 +1,17 @@
-module DrsCore::BaseModels
+module CerberusCore::BaseModels
   # This module implements the notion of a core record.  
   # Core records are fedora objects that hold 
   # metadata related to any number of content objects (defined in 
-  # DrsCore::ContentObject) attached to them via the standard isPartOf
+  # CerberusCore::ContentObject) attached to them via the standard isPartOf
   # relationship.  Core records can belong to collections.
   class CoreRecord < ActiveFedora::Base
-    include DrsCore::Concerns::ParanoidRightsValidation
+    include CerberusCore::Concerns::ParanoidRightsValidation
     include Hydra::ModelMixins::RightsMetadata
     include Hydra::ModelMethods
 
-    include DrsCore::Concerns::PropertiesDatastreamDelegations
-    include DrsCore::Concerns::Relatable
-    include DrsCore::Concerns::Traversals
+    include CerberusCore::Concerns::PropertiesDatastreamDelegations
+    include CerberusCore::Concerns::Relatable
+    include CerberusCore::Concerns::Traversals
 
     before_destroy :destroy_content_objects
 
@@ -22,10 +22,10 @@ module DrsCore::BaseModels
     CONTENT_CLASSES = nil
 
     # Default datastreams 
-    has_metadata name: "DC", type: DrsCore::Datastreams::DublinCoreDatastream
-    has_metadata name: "mods", type: DrsCore::Datastreams::ModsDatastream
-    has_metadata name: "properties", type: DrsCore::Datastreams::PropertiesDatastream
-    has_metadata name: "rightsMetadata", type: DrsCore::Datastreams::ParanoidRightsDatastream
+    has_metadata name: "DC", type: CerberusCore::Datastreams::DublinCoreDatastream
+    has_metadata name: "mods", type: CerberusCore::Datastreams::ModsDatastream
+    has_metadata name: "properties", type: CerberusCore::Datastreams::PropertiesDatastream
+    has_metadata name: "rightsMetadata", type: CerberusCore::Datastreams::ParanoidRightsDatastream
 
     # All querying logic assumes that core records are related to their parent 
     # collections via the is_member_of relationship.  Using this method to define

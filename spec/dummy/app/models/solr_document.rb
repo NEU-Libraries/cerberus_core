@@ -1,4 +1,4 @@
 class SolrDocument
   include Blacklight::Solr::Document
-  include DrsCore::SolrDocumentBehavior
+  include CerberusCore::SolrDocumentBehavior
 end

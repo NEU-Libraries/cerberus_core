@@ -2,7 +2,7 @@ require 'spec_helper'
 
 class RightsValidationTester < ActiveFedora::Base
   include Hydra::ModelMixins::RightsMetadata
-  include DrsCore::Concerns::ParanoidRightsValidation
+  include CerberusCore::Concerns::ParanoidRightsValidation
 
   def depositor
     self.properties.depositor.first 

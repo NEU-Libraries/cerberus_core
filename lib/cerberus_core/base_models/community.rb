@@ -1,4 +1,4 @@
-module DrsCore::BaseModels
+module CerberusCore::BaseModels
   # Implements the notion of a community, which is an object describing
   # a project with affiliated users, collections, and records.  Communities
   # may belong only to other communities via the has_affiliation relationship.
@@ -6,14 +6,14 @@ module DrsCore::BaseModels
     include Hydra::ModelMethods
     include Hydra::ModelMixins::RightsMetadata
 
-    include DrsCore::Concerns::PropertiesDatastreamDelegations
-    include DrsCore::Concerns::Relatable
-    include DrsCore::Concerns::Traversals
+    include CerberusCore::Concerns::PropertiesDatastreamDelegations
+    include CerberusCore::Concerns::Relatable
+    include CerberusCore::Concerns::Traversals
 
-    has_metadata name: 'DC', type: DrsCore::Datastreams::DublinCoreDatastream
-    has_metadata name: 'rightsMetadata', type: DrsCore::Datastreams::ParanoidRightsDatastream
-    has_metadata name: 'properties', type: DrsCore::Datastreams::PropertiesDatastream
-    has_metadata name: 'mods', type: DrsCore::Datastreams::ModsDatastream
+    has_metadata name: 'DC', type: CerberusCore::Datastreams::DublinCoreDatastream
+    has_metadata name: 'rightsMetadata', type: CerberusCore::Datastreams::ParanoidRightsDatastream
+    has_metadata name: 'properties', type: CerberusCore::Datastreams::PropertiesDatastream
+    has_metadata name: 'mods', type: CerberusCore::Datastreams::ModsDatastream
 
     # An array of model names for every Collection class that may have this 
     # Community class as a parent. E.g. COLLECTION_CLASSES = ["Kollection"]

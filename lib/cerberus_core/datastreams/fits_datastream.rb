@@ -1,4 +1,4 @@
-module DrsCore::Datastreams
+module CerberusCore::Datastreams
   # Datastream for holding the results of FITS characterization, which can be run
   # against FileContentDatastream datastreams via the Characterizable concern.
   class FitsDatastream < ActiveFedora::OmDatastream

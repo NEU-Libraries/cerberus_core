@@ -64,11 +64,11 @@ echo "Temporary github credentials"
 git config --global user.name "Change Me"
 git config --global user.email "change@me.com"
 
-echo "Setting up drs_core"
-cd /home/vagrant/drs_core/
+echo "Setting up cerberus_core"
+cd /home/vagrant/cerberus_core/
 gem install bundler 
 bundle install 
-cd /home/vagrant/drs_core/spec/dummy
+cd /home/vagrant/cerberus_core/spec/dummy
 rake db:migrate
 rails g hydra:jetty
 rake jetty:config
