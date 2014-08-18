@@ -1,6 +1,6 @@
 # Handles delegations to the properties datastream which are assumed
 # to be universally useful. 
-module DrsCore::Concerns::PropertiesDatastreamDelegations
+module CerberusCore::Concerns::PropertiesDatastreamDelegations
   extend ActiveSupport::Concern 
 
   included do 

@@ -1,4 +1,4 @@
-module DrsCore::Services
+module CerberusCore::Services
   # Given a pid and the name of the class that the pid object
   # is an instance of, this service handles querying Solr for 
   # children and descendents.  See the Traversals concern for 
@@ -23,9 +23,9 @@ module DrsCore::Services
         id = object["id"]
         class_name = object["active_fedora_model_ssi"]
 
-        DrsCore::Services::QueryService.new(id, class_name) 
+        CerberusCore::Services::QueryService.new(id, class_name) 
       else
-        DrsCore::Services::QueryService.new(object.pid, object.class.name) 
+        CerberusCore::Services::QueryService.new(object.pid, object.class.name) 
       end
     end
 

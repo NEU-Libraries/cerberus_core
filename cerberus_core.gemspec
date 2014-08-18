@@ -1,12 +1,12 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "drs_core/version"
+require "cerberus_core/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "drs_core"
-  s.version     = DrsCore::VERSION
+  s.name        = "cerberus_core"
+  s.version     = CerberusCore::VERSION
   s.authors     = ["Will Jackson"]
   s.email       = ["wjackson64@gmail.com"]
   s.homepage    = "http://github.com/NEU-Libraries/"

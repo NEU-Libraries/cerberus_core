@@ -1,6 +1,6 @@
-module DrsCore::SolrDocumentBehavior
+module CerberusCore::SolrDocumentBehavior
   extend ActiveSupport::Concern
-  include DrsCore::Concerns::Traversals
+  include CerberusCore::Concerns::Traversals
 
   module ClassMethods
     def find_by_pid(pid) 
@@ -9,7 +9,7 @@ module DrsCore::SolrDocumentBehavior
         SolrDocument.new(r.first) 
       else
         msg = "Item with id #{pid} not found in Solr"
-        raise DrsCore::PidNotFoundInSolrError, msg
+        raise CerberusCore::PidNotFoundInSolrError, msg
       end
     end
   end

@@ -1,3 +1,3 @@
-class TestFileContentDatastream < DrsCore::Datastreams::FileContentDatastream
+class TestFileContentDatastream < CerberusCore::Datastreams::FileContentDatastream
   
 end

@@ -1,20 +1,20 @@
-module DrsCore::BaseModels
+module CerberusCore::BaseModels
   # Implements the notion of a collection holding core records and other
   # collections.  Collections may belong to Communities but cannot have 
   # Communities as children. 
   class Collection < ActiveFedora::Base
-    include DrsCore::Concerns::ParanoidRightsValidation
+    include CerberusCore::Concerns::ParanoidRightsValidation
     include Hydra::ModelMixins::RightsMetadata
     include Hydra::ModelMethods 
 
-    include DrsCore::Concerns::PropertiesDatastreamDelegations
-    include DrsCore::Concerns::Relatable
-    include DrsCore::Concerns::Traversals
+    include CerberusCore::Concerns::PropertiesDatastreamDelegations
+    include CerberusCore::Concerns::Relatable
+    include CerberusCore::Concerns::Traversals
 
-    has_metadata name: 'DC', type: DrsCore::Datastreams::DublinCoreDatastream
-    has_metadata name: 'rightsMetadata', type: DrsCore::Datastreams::ParanoidRightsDatastream
-    has_metadata name: 'properties', type: DrsCore::Datastreams::PropertiesDatastream
-    has_metadata name: 'mods', type: DrsCore::Datastreams::ModsDatastream
+    has_metadata name: 'DC', type: CerberusCore::Datastreams::DublinCoreDatastream
+    has_metadata name: 'rightsMetadata', type: CerberusCore::Datastreams::ParanoidRightsDatastream
+    has_metadata name: 'properties', type: CerberusCore::Datastreams::PropertiesDatastream
+    has_metadata name: 'mods', type: CerberusCore::Datastreams::ModsDatastream
 
     # Records the model names for core record type classes that can have
     # an instance of this collection as their parent.  E.g. a child of the 

@@ -43,7 +43,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # we can test what we're doing. 
   config.vm.provision "shell", path: "spec/dummy/script/vagrant_provisioning.sh", privileged: false
 
-  config.vm.synced_folder ".", "/home/vagrant/drs_core", nfs: true 
+  config.vm.synced_folder ".", "/home/vagrant/cerberus_core", nfs: true 
 
   config.vm.network "private_network", ip: "192.168.3.3"
 end

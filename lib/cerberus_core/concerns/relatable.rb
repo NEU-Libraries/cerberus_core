@@ -1,5 +1,5 @@
 # Mostly internal helper module.
-module DrsCore::Concerns::Relatable 
+module CerberusCore::Concerns::Relatable 
   extend ActiveSupport::Concern 
 
   module ClassMethods

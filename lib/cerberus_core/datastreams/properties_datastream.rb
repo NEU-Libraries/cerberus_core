@@ -1,4 +1,4 @@
-module DrsCore::Datastreams
+module CerberusCore::Datastreams
   # Catch all datastream for information that didn't have another home.
   # Useful for implementing persistence of information that isn't interesting
   # from an archival/curation point of view, for example an array of urls pointing

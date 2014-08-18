@@ -1,4 +1,4 @@
-module DrsCore::Datastreams
+module CerberusCore::Datastreams
   class ModsDatastream < ActiveFedora::OmDatastream
     include OM::XML::Document
 

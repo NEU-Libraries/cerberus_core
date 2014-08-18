@@ -118,7 +118,7 @@ describe SolrDocument do
       before(:all) { @wumpus = Wumpus.create }  
 
       it "raises an error if the requested pid doesn't exist in Solr" do 
-        d = DrsCore::PidNotFoundInSolrError
+        d = CerberusCore::PidNotFoundInSolrError
         expect{ SolrDocument.find_by_pid("blargh") }.to raise_error d 
       end
 

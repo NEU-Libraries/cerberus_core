@@ -1,3 +1,3 @@
-class TestRightsDatastream < DrsCore::Datastreams::ParanoidRightsDatastream
-  use_terminology DrsCore::Datastreams::ParanoidRightsDatastream
+class TestRightsDatastream < CerberusCore::Datastreams::ParanoidRightsDatastream
+  use_terminology CerberusCore::Datastreams::ParanoidRightsDatastream
 end

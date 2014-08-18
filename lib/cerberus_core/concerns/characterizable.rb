@@ -2,7 +2,7 @@
 # objects that have a content datastream.  Since characterization is slow
 # and will typically need to be implemented in a job that runs outside of
 # the response cycle no default callback is created. 
-module DrsCore::Concerns::Characterizable
+module CerberusCore::Concerns::Characterizable
   extend ActiveSupport::Concern 
 
   included do 

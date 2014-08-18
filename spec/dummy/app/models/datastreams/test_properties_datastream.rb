@@ -1,5 +1,5 @@
-class TestPropertiesDatastream < DrsCore::Datastreams::PropertiesDatastream 
-  use_terminology DrsCore::Datastreams::PropertiesDatastream 
+class TestPropertiesDatastream < CerberusCore::Datastreams::PropertiesDatastream 
+  use_terminology CerberusCore::Datastreams::PropertiesDatastream 
 
   extend_terminology do |t| 
     t.test_attribute(path: 'testAttribute', namespace: 'dc')

@@ -1,4 +1,4 @@
-module DrsCore::BaseModels
+module CerberusCore::BaseModels
   # Implements the notion of a content object, which is a fedora object
   # holding a piece of content, e.g. a picture or an XML file.  Content objects
   # always belong to CoreRecord objects.
@@ -6,15 +6,15 @@ module DrsCore::BaseModels
     include Hydra::ModelMixins::RightsMetadata
     include Hydra::ModelMethods
 
-    include DrsCore::Concerns::PropertiesDatastreamDelegations
-    include DrsCore::Concerns::Characterizable
-    include DrsCore::Concerns::Relatable
+    include CerberusCore::Concerns::PropertiesDatastreamDelegations
+    include CerberusCore::Concerns::Characterizable
+    include CerberusCore::Concerns::Relatable
 
-    has_metadata name: 'DC', type: DrsCore::Datastreams::DublinCoreDatastream
-    has_metadata name: 'rightsMetadata', type: DrsCore::Datastreams::ParanoidRightsDatastream
-    has_metadata name: 'properties', type: DrsCore::Datastreams::PropertiesDatastream 
-    has_metadata name: 'characterization', type: DrsCore::Datastreams::FitsDatastream
-    has_file_datastream name: 'content', type: DrsCore::Datastreams::FileContentDatastream 
+    has_metadata name: 'DC', type: CerberusCore::Datastreams::DublinCoreDatastream
+    has_metadata name: 'rightsMetadata', type: CerberusCore::Datastreams::ParanoidRightsDatastream
+    has_metadata name: 'properties', type: CerberusCore::Datastreams::PropertiesDatastream 
+    has_metadata name: 'characterization', type: CerberusCore::Datastreams::FitsDatastream
+    has_file_datastream name: 'content', type: CerberusCore::Datastreams::FileContentDatastream 
 
     def type_label
       self.class.name
