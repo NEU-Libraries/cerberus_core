@@ -25,8 +25,8 @@ RSpec.configure do |config|
 
   Rails.backtrace_cleaner.remove_silencers!
 
-  # Load support files in spec/support/ 
-  Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f } 
+  # Load support files in spec/dummy/spec/support 
+  Dir["#{File.dirname(__FILE__)}/dummy/spec/support/**/*.rb"].each { |f| require f } 
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
