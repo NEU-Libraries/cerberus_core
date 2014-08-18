@@ -13,7 +13,7 @@ describe SolrDocument do
     before :all do 
       @community = Community.create 
 
-      @collection = Kollection.new 
+      @collection = Collection.new 
       @collection.depositor = "Will" 
       @collection.parent_community = @community
       @collection.save! 

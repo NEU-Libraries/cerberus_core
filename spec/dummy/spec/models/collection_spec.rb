@@ -1,23 +1,20 @@
 require 'spec_helper' 
-require "#{Rails.root}/spec/models/concerns/properties_datastream_delegations_spec"
-require "#{Rails.root}/spec/models/concerns/paranoid_rights_validation_spec"
 
-describe Kollection do 
-
+describe Collection do    
   describe "Parent Folder" do 
     before(:all) do 
-      @parent = Kollection.new 
+      @parent = Collection.new 
       @parent.depositor = "Will" 
       @parent.save! 
     end
 
-    let(:kollection) { Kollection.new }
+    let(:collection) { Collection.new }
 
-    after(:each) { kollection.destroy if kollection.persisted? }  
+    after(:each) { collection.destroy if collection.persisted? }  
 
     it "can be attached" do 
-      kollection.parent_kollection = @parent
-      expect(kollection.parent_kollection).to eq(@parent) 
+      collection.parent_collection = @parent
+      expect(collection.parent_collection).to eq(@parent) 
     end
 
     after(:all) { @parent.destroy } 
@@ -25,23 +22,23 @@ describe Kollection do
 
   describe "Queries" do 
     before(:all) do 
-      @ancestor = Kollection.new()
+      @ancestor = Collection.new()
       @ancestor.depositor = "Will" 
       @ancestor.save!
 
-      @child_kol = Kollection.new()
-      @child_kol.depositor = "Will" 
-      @child_kol.parent_kollection = @ancestor 
-      @child_kol.save! 
+      @child_col = Collection.new()
+      @child_col.depositor = "Will" 
+      @child_col.parent_collection = @ancestor 
+      @child_col.save! 
 
       @child_file = CoreFile.new()
       @child_file.depositor = "Will" 
       @child_file.parent = @ancestor 
       @child_file.save!
 
-      @descendent_kol = Kollection.new()
+      @descendent_kol = Collection.new()
       @descendent_kol.depositor = "Will" 
-      @descendent_kol.parent_kollection = @child_kol 
+      @descendent_kol.parent_collection = @child_col 
       @descendent_kol.save!
 
       @descendent_file = CoreFile.new()
@@ -53,13 +50,13 @@ describe Kollection do
       @random_file.depositor = "Will" 
       @random_file.save! 
 
-      @random_kol  = Kollection.new()
+      @random_kol  = Collection.new()
       @random_kol.depositor = "Will" 
       @random_kol.save!
     end
 
     it "can find children" do 
-      expected = [@child_kol, @child_file] 
+      expected = [@child_col, @child_file] 
 
       expect(@ancestor.children(:return_as => :models)).to match_array expected 
     end
@@ -75,12 +72,12 @@ describe Kollection do
     end
 
     it "can find children who are collections" do 
-      expected = [@child_kol]
+      expected = [@child_col]
       expect(@ancestor.collections(:return_as => :models)).to match_array expected
     end
 
     it "can find all descendents" do 
-      expected = [@child_kol, @child_file, @descendent_file, @descendent_kol]
+      expected = [@child_col, @child_file, @descendent_file, @descendent_kol]
       expect(@ancestor.descendents(:return_as => :models)).to match_array expected 
     end
 
@@ -90,12 +87,12 @@ describe Kollection do
     end 
 
     it "can find all descendents who are collections" do 
-      expected = [@child_kol, @descendent_kol]
+      expected = [@child_col, @descendent_kol]
       expect(@ancestor.descendent_collections(:return_as => :models)).to match_array expected
     end
 
     after(:all) do 
-      @ancestor.destroy ; @child_kol.destroy ; @child_file.destroy
+      @ancestor.destroy ; @child_col.destroy ; @child_file.destroy
       @random_file.destroy ; @descendent_kol.destroy ; @descendent_file.destroy  
     end
   end
