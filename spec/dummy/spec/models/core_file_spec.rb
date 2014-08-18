@@ -1,6 +1,4 @@
 require 'spec_helper'
-require "#{Rails.root}/spec/models/concerns/properties_datastream_delegations_spec"
-require "#{Rails.root}/spec/models/concerns/paranoid_rights_validation_spec"
 
 describe CoreFile do 
   describe "Content Objects" do 
