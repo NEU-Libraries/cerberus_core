@@ -13,6 +13,8 @@ Gem::Specification.new do |s|
   s.summary     = "Core architectural components of a fedora repository built in the DRS repository."
   s.description = "What it says on the tin"
 
+  s.required_ruby_version = "~> 2.0.0"
+
   s.add_dependency "rails", "~> 4.0.0"
   s.add_dependency "hydra-head", "7.2.0"
   s.add_dependency "hydra-derivatives", "0.0.8"
