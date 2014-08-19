@@ -5,6 +5,7 @@ module CerberusCore::BaseModels
   class ContentObject < ActiveFedora::Base
     include CerberusCore::Concerns::PropertiesDatastreamDelegations
     include CerberusCore::Concerns::ParanoidRightsDatastreamDelegations
+    include CerberusCore::Concerns::FileContentDatastreamDelegations
     include CerberusCore::Concerns::Characterizable
     include CerberusCore::Concerns::Relatable
 

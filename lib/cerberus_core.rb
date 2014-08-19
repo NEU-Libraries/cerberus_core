@@ -15,6 +15,7 @@ module CerberusCore
   require 'cerberus_core/concerns/paranoid_rights_validation'
   require 'cerberus_core/concerns/properties_datastream_delegations'
   require 'cerberus_core/concerns/paranoid_rights_datastream_delegations'
+  require 'cerberus_core/concerns/file_content_datastream_delegations'
   require 'cerberus_core/concerns/characterizable'
   require 'cerberus_core/concerns/relatable'
   require 'cerberus_core/concerns/traversals'
