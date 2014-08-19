@@ -4,10 +4,8 @@ module CerberusCore::BaseModels
   # Communities as children. 
   class Collection < ActiveFedora::Base
     include CerberusCore::Concerns::ParanoidRightsValidation
-    include Hydra::ModelMixins::RightsMetadata
-    include Hydra::ModelMethods 
-
     include CerberusCore::Concerns::PropertiesDatastreamDelegations
+    include CerberusCore::Concerns::ParanoidRightsDatastreamDelegations
     include CerberusCore::Concerns::Relatable
     include CerberusCore::Concerns::Traversals
 

@@ -3,10 +3,8 @@ module CerberusCore::BaseModels
   # holding a piece of content, e.g. a picture or an XML file.  Content objects
   # always belong to CoreRecord objects.
   class ContentObject < ActiveFedora::Base
-    include Hydra::ModelMixins::RightsMetadata
-    include Hydra::ModelMethods
-
     include CerberusCore::Concerns::PropertiesDatastreamDelegations
+    include CerberusCore::Concerns::ParanoidRightsDatastreamDelegations
     include CerberusCore::Concerns::Characterizable
     include CerberusCore::Concerns::Relatable
 

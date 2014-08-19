@@ -174,5 +174,9 @@ module CerberusCore::Datastreams
       end
       builder.doc
     end
+
+    def prefix
+      ""
+    end
   end
 end

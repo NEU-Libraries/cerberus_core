@@ -50,37 +50,38 @@ describe SolrDocument do
     it "allows us to check an object's mass permissions" do
       expect(doc.is_private?).to be true
 
-      core_file.read_groups = ['public']
+      core_file.permissions({group: "public"}, "read")
       expect(doc.is_public?).to be true 
 
-      core_file.read_groups = ['registered']
+      core_file.permissions({group: "public"}, "none") 
+      core_file.permissions({group: "registered"}, "read")
       expect(doc.is_registered?).to be true 
     end
 
     it "allows us to see an object's read users" do 
-      core_file.read_users = ["Will"]
-      expect(doc.read_people).to eq ["Will"]
+      core_file.permissions({person: "Will"}, "read")
+      expect(doc.read_users).to eq ["Will"]
     end
 
     it "allows us to see an object's edit users" do 
-      core_file.edit_users = ["Will"] 
-      expect(doc.edit_people).to eq ["Will"]
+      core_file.permissions({person: "Will"}, "edit")
+      expect(doc.edit_users).to eq ["Will"]
     end
 
     it "allows us to see an object's edit groups" do 
-      core_file.edit_groups = ["Willump"]
+      core_file.permissions({group: "Willump"}, "edit") 
       expect(doc.edit_groups).to eq ["Willump"]
     end
 
     it "allows us to see an object's read groups" do 
-      core_file.read_groups = ["Willump"]
+      core_file.permissions({group: "Willump"}, "read")
       expect(doc.read_groups).to eq ["Willump"]
     end
   end
 
   describe "Properties datastream access" do 
     it "allows us to read an objects depositor" do 
-      core_file.apply_depositor_metadata "Will" 
+      core_file.depositor = "Will" 
       expect(doc.depositor).to eq "Will" 
     end
 
