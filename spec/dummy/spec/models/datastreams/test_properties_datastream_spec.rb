@@ -18,8 +18,14 @@ describe TestPropertiesDatastream do
       end
     end
 
-    describe "In Progress State" do 
+    describe "Download Filename" do 
+      it "can be set" do 
+        properties.download_filename = "test" 
+        expect(properties.download_filename).to eq ["test"]
+      end
+    end
 
+    describe "In Progress State" do 
       it "can be set" do 
         expect(properties.in_progress?).to eq false 
         properties.tag_as_in_progress
