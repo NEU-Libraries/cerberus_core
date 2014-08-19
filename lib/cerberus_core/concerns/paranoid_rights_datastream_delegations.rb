@@ -28,4 +28,20 @@ module CerberusCore::Concerns::ParanoidRightsDatastreamDelegations
     x = self.users.keep_if { |k, v| v == 'edit' }
     return x.keys
   end
+
+  def mass_permissions=(string)
+    if string == 'public'
+      self.permissions({group: "public"}, "read") 
+    elsif string == 'private' 
+      self.permissions({group: "public"}, "none") 
+    end
+  end
+
+  def mass_permissions
+    if read_groups.include? "public" 
+      "public" 
+    else
+      "private"
+    end
+  end
 end

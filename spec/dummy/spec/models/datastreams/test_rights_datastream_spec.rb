@@ -35,5 +35,14 @@ describe TestRightsDatastream do
       obj.permissions({group: "j3"}, "edit") 
       expect(obj.edit_groups).to match_array ["j3"] 
     end
+
+    it "can assign mass permissions" do 
+      obj.mass_permissions = 'public' 
+      expect(obj.read_groups).to include "public" 
+      expect(obj.mass_permissions).to eq "public"
+      obj.mass_permissions = 'private' 
+      expect(obj.read_groups).not_to include "public" 
+      expect(obj.mass_permissions).to eq "private"
+    end
   end
 end
