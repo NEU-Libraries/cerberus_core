@@ -26,6 +26,10 @@ module CerberusCore::Datastreams
       builder.doc
     end
 
+    def prefix
+      ""
+    end
+
     # Checks if the Fedora object is in progress, indicating
     # that the system must do additional work before it can be 
     # considered 'complete'.  Typically, this additional work involves

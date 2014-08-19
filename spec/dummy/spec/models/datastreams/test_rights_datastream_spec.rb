@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 class RightsValidationTester < ActiveFedora::Base
-  include Hydra::ModelMixins::RightsMetadata
+  include CerberusCore::Concerns::ParanoidRightsDatastreamDelegations
   include CerberusCore::Concerns::ParanoidRightsValidation
 
   def depositor
@@ -14,13 +14,26 @@ end
 
 describe TestRightsDatastream do 
   let(:obj) { RightsValidationTester.new } 
-
   after(:each) { obj.destroy if obj.persisted? }  
 
   describe "Inherited Functionality:" do 
-
     it "carries over validations" do 
       expect(obj.rightsMetadata.respond_to? :validate).to be true
+    end
+  end
+
+  describe "Permissions logic" do 
+
+    it "can assign and read users" do 
+      expect(obj.read_users).to eq []
+      obj.permissions({person: "jjj"}, "read") 
+      expect(obj.read_users).to match_array ["jjj"]
+    end
+
+    it "can assign and read groups" do 
+      expect(obj.edit_groups).to eq []
+      obj.permissions({group: "j3"}, "edit") 
+      expect(obj.edit_groups).to match_array ["j3"] 
     end
   end
 end

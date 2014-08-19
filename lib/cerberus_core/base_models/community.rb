@@ -3,10 +3,8 @@ module CerberusCore::BaseModels
   # a project with affiliated users, collections, and records.  Communities
   # may belong only to other communities via the has_affiliation relationship.
   class Community < ActiveFedora::Base 
-    include Hydra::ModelMethods
-    include Hydra::ModelMixins::RightsMetadata
-
     include CerberusCore::Concerns::PropertiesDatastreamDelegations
+    include CerberusCore::Concerns::ParanoidRightsDatastreamDelegations
     include CerberusCore::Concerns::Relatable
     include CerberusCore::Concerns::Traversals
 

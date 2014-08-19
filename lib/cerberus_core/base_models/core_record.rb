@@ -6,9 +6,7 @@ module CerberusCore::BaseModels
   # relationship.  Core records can belong to collections.
   class CoreRecord < ActiveFedora::Base
     include CerberusCore::Concerns::ParanoidRightsValidation
-    include Hydra::ModelMixins::RightsMetadata
-    include Hydra::ModelMethods
-
+    include CerberusCore::Concerns::ParanoidRightsDatastreamDelegations
     include CerberusCore::Concerns::PropertiesDatastreamDelegations
     include CerberusCore::Concerns::Relatable
     include CerberusCore::Concerns::Traversals

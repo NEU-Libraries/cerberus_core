@@ -74,16 +74,16 @@ module CerberusCore::SolrDocumentBehavior
     Array(self[Ability.read_group_field])
   end
 
-  def read_people
-    Array(self[Ability.read_person_field])
+  def read_users
+    Array(self[Ability.read_user_field])
   end
 
   def edit_groups
     Array(self[Ability.edit_group_field])
   end
 
-  def edit_people
-    Array(self[Ability.edit_person_field])
+  def edit_users
+    Array(self[Ability.edit_user_field])
   end
 
   def is_public?

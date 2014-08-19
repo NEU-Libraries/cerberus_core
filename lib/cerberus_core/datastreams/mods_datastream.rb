@@ -131,6 +131,10 @@ module CerberusCore::Datastreams
       t.date_issued(proxy: [:origin_info, :date_issued])
     end
 
+    def prefix
+      ""
+    end
+
     # We override to_solr here to add
     # 1. A creation_year field.
     # 2. A valid date Begin field

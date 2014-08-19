@@ -13,14 +13,18 @@ module CerberusCore::Concerns::PropertiesDatastreamDelegations
     has_attributes :depositor, datastream: "properties", multiple: false
     has_attributes :thumbnail_list, datastream: "properties", multiple: true
 
-    # Overrides the depositor= delegation to ensure that
-    # #apply_depositor_metadata from Hydra::ModelMethods is 
-    # used instead. 
-    # ==== Attributes 
-    # * +whatever+ - The thing you wish to set as the depositor.  Is passed
-    #   straight to #apply_depositor_metadata, so look there to see behavior.
-    def depositor=(whatever) 
-      self.apply_depositor_metadata whatever 
+    # Ensures that the current depositor always has edit permissions, and that
+    # people who are unflagged as the depositor (for whatever reason) lose their 
+    # edit permissions.
+    def depositor=(user_key)
+      prior_depositor = self.properties.depositor.first
+
+      if prior_depositor.present?  
+        self.rightsMetadata.permissions({person: prior_depositor}, 'none') 
+      end
+        
+      self.properties.depositor = user_key
+      self.rightsMetadata.permissions({person: user_key}, 'edit') 
     end
   end
 end

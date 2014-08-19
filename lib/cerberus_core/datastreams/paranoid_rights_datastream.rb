@@ -21,5 +21,9 @@ module CerberusCore::Datastreams
       end
       return valid
     end
+
+    def prefix
+      ""
+    end
   end
 end
