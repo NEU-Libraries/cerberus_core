@@ -14,5 +14,8 @@ spec/dummy/tmp/
 spec/dummy/.sass-cache
 .vagrant/
 
+# Ignore .ruby-version because that should be specified by Gem::Specification for actual end users
+.ruby-version
+
 # Ignore jetty because it has to be generated per machine.
 spec/dummy/jetty
