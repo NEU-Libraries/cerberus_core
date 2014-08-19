@@ -17,6 +17,7 @@ module CerberusCore::Datastreams
       t.thumbnail_list :index_as=>[:stored_searchable]
       t.canonical  :index_as=>[:stored_searchable]
       t.in_progress path: 'inProgress', :index_as=>[:stored_searchable]
+      t.download_filename index_as: [:symbol]
     end
 
     def self.xml_template

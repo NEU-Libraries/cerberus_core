@@ -10,7 +10,9 @@ module CerberusCore::Concerns::PropertiesDatastreamDelegations
     delegate :canonize, to: "properties" 
     delegate :uncanonize, to: "properties" 
     delegate :canonical?, to: "properties" 
-    has_attributes :depositor, datastream: "properties", multiple: false
+    has_attributes :depositor, :download_filename, 
+                   datastream: "properties", 
+                   multiple: false
     has_attributes :thumbnail_list, datastream: "properties", multiple: true
 
     # Ensures that the current depositor always has edit permissions, and that
