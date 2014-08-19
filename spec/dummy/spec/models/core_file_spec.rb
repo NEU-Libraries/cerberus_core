@@ -3,8 +3,8 @@ require 'spec_helper'
 describe CoreFile do 
   describe "Content Objects" do 
     before :all do 
-      @core    = CoreFile.new 
-      @core.apply_depositor_metadata "Will" 
+      @core = CoreFile.new 
+      @core.depositor =  "Will" 
       @core.save! 
 
       @wigwum  = Wigwum.new 

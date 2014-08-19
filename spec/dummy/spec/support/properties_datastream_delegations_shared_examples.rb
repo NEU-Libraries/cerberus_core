@@ -11,7 +11,7 @@ RSpec.shared_examples "A Properties Delegator" do
     expect(methods.all? { |x| delegator.respond_to? x }).to be true 
   end
 
-  it "uses apply_depositor_metadata to run depositor=" do 
+  it "sets edit permissions for the depositor" do 
     delegator.depositor = "test" 
     expect(delegator.depositor).to eq("test") 
     expect(delegator.edit_users).to include("test")

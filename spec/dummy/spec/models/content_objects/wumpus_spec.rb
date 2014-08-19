@@ -5,7 +5,7 @@ describe Wumpus do
   describe "ownership" do 
     before(:all) do
      @core = CoreFile.new 
-     @core.apply_depositor_metadata("Will") 
+     @core.depositor = "Will" 
      @core.save! 
    end
 
