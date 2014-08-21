@@ -8,14 +8,12 @@ module CerberusCore
 
     def insert_context_file
       puts "copying over exist db context file"
-      path = "#{Rails.root}/jetty/contexts"
-      copy_file "exist.xml", "#{path}/exist.xml"
+      copy_file "exist.xml", "#{Rails.root}/jetty/contexts/exist.xml"
     end
 
     def insert_config_file
       puts "copying over exist db connector configuration"
-      path = "#{Rails.root}/config"
-      copy_file "exist_db.yml", "#{path}/exist_db.yml" 
+      copy_file "exist.yml", "#{Rails.root}/config/exist.yml" 
     end
   end
 end
