@@ -1,0 +1,11 @@
+Description:
+    Given a preexisting hydra-jetty installation (rails g hydra:jetty), this
+    generator sets up an instance of eXist-db to run alongside Fedora and Solr.
+
+Example:
+    rails generate exist_db
+
+    This will create:
+        jetty/webapps/exist-2.2.rev.war
+        jetty/contexts/exist.xml
+        config/exist_db.yml
