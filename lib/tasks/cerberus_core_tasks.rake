@@ -1,4 +1,4 @@
 # desc "Explaining what the task does"
-# task :drs_core do
+# task :cerberus_core do
 #   # Task goes here
 # end
