@@ -44,7 +44,6 @@ module CerberusCore::Services
       return c.body_str 
     end
 
-
     def put_file(xml, db_loc)
       validate_xml(xml)
       validate_file_path(db_loc)
