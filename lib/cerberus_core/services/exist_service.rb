@@ -32,14 +32,35 @@ module CerberusCore::Services
       puts response.response_code
     end
 
+    def get_resource(db_loc)
+      c = authed_curl(build_path(db_loc))
+      c.http_get
+
+      unless c.response_code == 200 
+        msg = "Server responded with status #{c.response_code}"
+        raise CerberusCore::InvalidExistInteractionError, msg 
+      end
+
+      return c.body_str 
+    end
+
+
     def put_file(xml, db_loc)
       validate_xml(xml)
       validate_file_path(db_loc)
       c = authed_curl(build_path(db_loc))
+
       c.http_put(xml) do |curl|
         curl.headers["Content-Type"]   = "application/xml" 
         curl.headers["Content-Length"] = xml.length
       end
+
+      # If the resource was not created raise an error
+      unless [200, 204, 201].include? c.response_code
+        msg = "Server responded with status #{c.response_code}"
+        raise CerberusCore::InvalidExistInteractionError, msg
+      end
+
       return c
     end 
 
@@ -65,7 +86,8 @@ module CerberusCore::Services
     end
 
     # Ensures attempts at file upload are being placed in locations
-    # that look like files
+    # that look like files, with the specified collections also all 
+    # looking like collections
     def validate_file_path(path)
       path_array = path.split("/")
       last_index = path_array.length - 1
