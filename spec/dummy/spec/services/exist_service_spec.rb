@@ -34,12 +34,25 @@ describe CerberusCore::Services::ExistService do
     end
   end
 
-  describe "Post" do 
+  describe "#put_file" do 
     it "allows us to upload xml strings to the database" do 
-      file = File.open(Rails.root.join("spec", "fixtures", "files", "xml.xml"))
-      e    = exist.put_document(xml, "c/one/valid.xml")
+      xml = File.read(Rails.root.join("spec", "fixtures", "files", "xml.xml"))
+      e   = exist.put_file(xml, "c/one/valid.xml")
       expect(e.response_code).to eq 201
-      expect(e.header_str).to eq "blah"
+    end
+  end
+
+  describe "#get_resource" do 
+
+    it "throws an error on invalid GET requests" do 
+      e = CerberusCore::InvalidExistInteractionError
+      expect{ exist.get_resource("nope/nope/nope.xml") }.to raise_error e 
+    end
+
+    it "retrieves the body of the document on valid GET doc requests" do 
+      xml = "<valid>XML</valid>" 
+      exist.put_file(xml, "a/b/test.xml")
+      expect(exist.get_resource("a/b/test.xml")).to eq xml 
     end
   end
 end
