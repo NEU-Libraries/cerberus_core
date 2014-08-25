@@ -1,35 +1,26 @@
 module CerberusCore::Services
   class ExistService 
-    attr_accessor :path, :uname, :pwd
+    attr_accessor :path, :username, :password
 
     def initialize
       env        = Rails.env.to_s
       config     = YAML.load_file(Rails.root.join("config", "exist.yml").to_s)
       self.path  = config[env]["base"]
-      self.uname = config[env]["uname"] || "admin" 
-      self.pwd   = config[env]["pwd"] || ""
+      self.username = config[env]["username"] || "admin" 
+      self.password   = config[env]["password"] || ""
     end
 
     def self.wipe_test_directory
       config = YAML.load_file(Rails.root.join("config", "exist.yml").to_s)
       path   = config["test"]["base"]
-      uname  = config["test"]["uname"] || "admin" 
-      pwd    = config["test"]["pwd"]   || ""
+      username  = config["test"]["username"] || "admin" 
+      password    = config["test"]["password"]   || ""
 
       c = Curl::Easy.new("#{path}")
       c.http_auth_types = :basic 
-      c.username        = uname 
-      c.password        = pwd 
+      c.username        = username 
+      c.password        = password 
       c.http_delete
-    end
-
-    def self.test_put
-      x = CerberusCore::Services::ExistService.new
-      puts "path is #{x.path}"
-      puts "username is #{x.uname}"
-      puts "pwd is #{x.pwd}"
-      response = x.put_file("<xml>One</xml>", "test_two/three/test/test.xml")
-      puts response.response_code
     end
 
     def get_resource(db_loc)
@@ -72,8 +63,8 @@ module CerberusCore::Services
     def authed_curl(full_path)
       Curl::Easy.new(full_path).tap do |c| 
         c.http_auth_types = :basic 
-        c.username        = self.uname 
-        c.password        = self.pwd 
+        c.username        = self.username 
+        c.password        = self.password 
       end
     end
 
