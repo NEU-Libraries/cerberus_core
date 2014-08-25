@@ -52,7 +52,12 @@ describe CerberusCore::Services::ExistService do
     it "retrieves the body of the document on valid GET doc requests" do 
       xml = "<valid>XML</valid>" 
       exist.put_file(xml, "a/b/test.xml")
-      expect(exist.get_resource("a/b/test.xml")).to eq xml 
+      expect(exist.get_resource "a/b/test.xml").to eq xml 
+    end
+
+    it "retrieves the XML collection description for collections" do 
+      exist.put_file("<v>b</v>", "a.xml")
+      expect(exist.get_resource "").not_to eq ""
     end
   end
 end
