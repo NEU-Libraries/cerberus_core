@@ -1,9 +1,7 @@
 class Community < CerberusCore::BaseModels::Community
   relate_to_parent_community(:parent_community, "Community") 
 
-  COLLECTION_CLASSES  = ["Collection"]
-
-  COMMUNITY_CLASSES   = ["Community"]
-
-  CORE_RECORD_CLASSES = ["CoreFile"]
+  has_collection_types ["Collection"]
+  has_community_types  ["Community"]
+  has_core_file_types  ["CoreFile"]
 end

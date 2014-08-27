@@ -19,6 +19,9 @@ module CerberusCore
   require 'cerberus_core/concerns/characterizable'
   require 'cerberus_core/concerns/relatable'
   require 'cerberus_core/concerns/traversals'
+  require 'cerberus_core/concerns/has_core_files'
+  require 'cerberus_core/concerns/has_collections'
+  require 'cerberus_core/concerns/has_communities'
 
   require 'cerberus_core/services/query_service'
   require 'cerberus_core/services/exist_service'

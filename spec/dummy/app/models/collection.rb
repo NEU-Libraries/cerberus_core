@@ -3,6 +3,6 @@ class Collection < CerberusCore::BaseModels::Collection
   relate_to_parent_collection(:parent_collection, "Collection")
   relate_to_parent_community(:parent_community, "Community")
 
-  CORE_RECORD_CLASSES = ["CoreFile"]
-  COLLECTION_CLASSES  = ["Collection"]
+  has_core_file_types  ["CoreFile"]
+  has_collection_types ["Collection"]
 end

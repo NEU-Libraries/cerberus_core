@@ -8,23 +8,13 @@ module CerberusCore::BaseModels
     include CerberusCore::Concerns::ParanoidRightsDatastreamDelegations
     include CerberusCore::Concerns::Relatable
     include CerberusCore::Concerns::Traversals
+    include CerberusCore::Concerns::HasCoreFiles 
+    include CerberusCore::Concerns::HasCollections
 
     has_metadata name: 'DC', type: CerberusCore::Datastreams::DublinCoreDatastream
     has_metadata name: 'rightsMetadata', type: CerberusCore::Datastreams::ParanoidRightsDatastream
     has_metadata name: 'properties', type: CerberusCore::Datastreams::PropertiesDatastream
     has_metadata name: 'mods', type: CerberusCore::Datastreams::ModsDatastream
-
-    # Records the model names for core record type classes that can have
-    # an instance of this collection as their parent.  E.g. a child of the 
-    # Collection class that has CoreFile children would specify
-    # CORE_RECORD_CLASSES = ["CoreFile"]
-    CORE_RECORD_CLASSES = []
-
-    # Records the model names for folder type classes that can have an instance
-    # of this collection as their parent.  Typically this will be the model that
-    # COLLECTION_CLASSES is being defined for.  
-    # E.g. Collection::COLLECTION_CLASSES = ["Collection"]
-    COLLECTION_CLASSES = []
 
     # All querying logic assumes that collections are related to communities
     # via the is_member_of relationship.  Using this method to define that
