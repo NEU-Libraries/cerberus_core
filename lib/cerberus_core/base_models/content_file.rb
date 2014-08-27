@@ -29,8 +29,11 @@ module CerberusCore::BaseModels
     #   the model name cannot be inferred from rel_name.  E.g., if the rel_name is 
     #   :core_file, and it points at a class called CoreFile, this can be left set
     #   to nil
-    def self.relate_to_core_record(rel_name, rel_class = nil)
-      self.relation_asserter(:belongs_to, rel_name, :is_part_of, rel_class)
+    def self.core_file_relationship(rel_name, rel_class = nil)
+      self.relation_asserter(:belongs_to, 
+                             rel_name, 
+                             :is_part_of, 
+                             rel_class)
     end
   end
 end
