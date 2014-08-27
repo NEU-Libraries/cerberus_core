@@ -1,3 +1,3 @@
 class Wumpus < CerberusCore::BaseModels::ContentFile
-  relate_to_core_record(:core_file)
+  core_file_relationship :core_file
 end
