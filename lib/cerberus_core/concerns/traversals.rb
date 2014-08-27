@@ -62,16 +62,4 @@ module CerberusCore::Concerns::Traversals
   def descendent_communities(opts)
     new_query.get_descendent_communities opts
   end
-
-  # Fetch all content objects named in CONTENT_OBJECTS 
-  # for this fedora object
-  def content_objects(opts) 
-    new_query.get_content_objects opts 
-  end
-
-  # Fetch the (presumed singular) canonical (presumed content) object
-  # for this fedora object
-  def canonical_object(opts) 
-    new_query.get_canonical_object opts 
-  end
 end
