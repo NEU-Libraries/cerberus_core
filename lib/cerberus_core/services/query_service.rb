@@ -87,17 +87,10 @@ module CerberusCore::Services
     # a CoreRecord type object, or just one with no content, 
     # return an empty array.
     def get_content_objects(opts = {}) 
-      opts = initialize_opts opts
-      if self.class_name.constantize.constants.include? :CONTENT_CLASSES
-        models  = self.class_name.constantize::CONTENT_CLASSES
-        models  = construct_model_query(models)
-        part_of = "is_part_of_ssim:#{full_pid}"
-        query   = "#{models} AND #{part_of}"
-        results = ActiveFedora::SolrService.query(query, rows: 999)
-        parse_return_statement(opts[:return_as], results)
-      else
-        return [] 
-      end
+      opts    = initialize_opts opts
+      query   = "is_part_of_ssim:#{full_pid}"
+      results = ActiveFedora::SolrService.query(query, rows: 999)
+      parse_return_statement(opts[:return_as], results)
     end
 
     # Return the canonical object for this pid.  If pid doesn't point
