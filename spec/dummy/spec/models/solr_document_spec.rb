@@ -48,14 +48,10 @@ describe SolrDocument do
 
   describe "Rights metadata access" do 
     it "allows us to check an object's mass permissions" do
-      expect(doc.is_private?).to be true
+      expect(doc.mass_permissions).to eq "private"
 
       core_file.permissions({group: "public"}, "read")
-      expect(doc.is_public?).to be true 
-
-      core_file.permissions({group: "public"}, "none") 
-      core_file.permissions({group: "registered"}, "read")
-      expect(doc.is_registered?).to be true 
+      expect(doc.mass_permissions).to eq "public"
     end
 
     it "allows us to see an object's read users" do 
