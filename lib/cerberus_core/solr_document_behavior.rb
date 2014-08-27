@@ -14,6 +14,14 @@ module CerberusCore::SolrDocumentBehavior
     end
   end
 
+  #---------------
+  # General stuff
+  #---------------
+
+  def klass
+    unique_read "active_fedora_model_ssi" 
+  end
+
   #-----------------------
   # Mods Datastream Stuff 
   #-----------------------

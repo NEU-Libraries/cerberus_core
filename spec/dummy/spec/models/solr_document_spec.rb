@@ -46,6 +46,12 @@ describe SolrDocument do
     pending "Figure out how people access the mods ds."
   end
 
+  describe "System info access" do 
+    it "allows us to get the fedora model of this object" do 
+      expect(doc.klass).to eq "CoreFile"
+    end
+  end
+
   describe "Rights metadata access" do 
     it "allows us to check an object's mass permissions" do
       expect(doc.mass_permissions).to eq "private"
