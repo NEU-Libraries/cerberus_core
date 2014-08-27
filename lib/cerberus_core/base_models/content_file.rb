@@ -2,7 +2,7 @@ module CerberusCore::BaseModels
   # Implements the notion of a content object, which is a fedora object
   # holding a piece of content, e.g. a picture or an XML file.  Content objects
   # always belong to CoreRecord objects.
-  class ContentObject < ActiveFedora::Base
+  class ContentFile < ActiveFedora::Base
     include CerberusCore::Concerns::PropertiesDatastreamDelegations
     include CerberusCore::Concerns::ParanoidRightsDatastreamDelegations
     include CerberusCore::Concerns::FileContentDatastreamDelegations

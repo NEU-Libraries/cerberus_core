@@ -1,3 +1,3 @@
-class Wigwum < CerberusCore::BaseModels::ContentObject
+class Wigwum < CerberusCore::BaseModels::ContentFile
   relate_to_core_record(:core_file)
 end
