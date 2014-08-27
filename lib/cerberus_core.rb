@@ -24,9 +24,10 @@ module CerberusCore
   require 'cerberus_core/services/exist_service'
 
   require 'cerberus_core/base_models/content_object'
-  require 'cerberus_core/base_models/core_record'
+  require 'cerberus_core/base_models/core_file'
   require 'cerberus_core/base_models/collection'
   require 'cerberus_core/base_models/community'
 
+  require 'cerberus_core/solr_document_behavior'
   require 'cerberus_core/scripts'
 end

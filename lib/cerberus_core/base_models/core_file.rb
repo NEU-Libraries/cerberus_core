@@ -4,7 +4,7 @@ module CerberusCore::BaseModels
   # metadata related to any number of content objects (defined in 
   # CerberusCore::ContentObject) attached to them via the standard isPartOf
   # relationship.  Core records can belong to collections.
-  class CoreRecord < ActiveFedora::Base
+  class CoreFile < ActiveFedora::Base
     include CerberusCore::Concerns::ParanoidRightsValidation
     include CerberusCore::Concerns::ParanoidRightsDatastreamDelegations
     include CerberusCore::Concerns::PropertiesDatastreamDelegations
