@@ -55,12 +55,12 @@ module CerberusCore::Services
 
     # See Traversals.
     def get_child_records(opts = {})
-      query_with_models(:records, opts)
+      query_with_models(:files, opts)
     end
 
     # See Traversals.
     def get_descendent_records(opts = {})
-      filter_descendent_query(:records, opts)
+      filter_descendent_query(:files, opts)
     end
 
     # See Traversals.
@@ -186,19 +186,19 @@ module CerberusCore::Services
       communities = []
 
       check = Proc.new do |x, y| 
-        const.constants.include?(x) && y.include?(type)
+        const.public_methods.include?(x) && y.include?(type)
       end
 
-      if check.call(:CORE_RECORD_CLASSES, [:records, :all])
-        records = const::CORE_RECORD_CLASSES 
+      if check.call(:core_file_types, [:files, :all])
+        records = const.core_file_types
       end
 
-      if check.call(:COLLECTION_CLASSES, [:collections, :all])
-        folders = const::COLLECTION_CLASSES
+      if check.call(:collection_types, [:collections, :all])
+        folders = const.collection_types
       end
 
-      if check.call(:COMMUNITY_CLASSES, [:communities, :all])
-        communities = const::COMMUNITY_CLASSES 
+      if check.call(:community_types, [:communities, :all])
+        communities = const.community_types
       end
 
       return records + folders + communities
