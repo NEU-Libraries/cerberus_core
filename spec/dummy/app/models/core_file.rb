@@ -1,3 +1,3 @@
 class CoreFile < CerberusCore::BaseModels::CoreFile
-  relate_to_parent_collection(:parent, "Collection")
+  parent_collection_relationship :collection
 end
