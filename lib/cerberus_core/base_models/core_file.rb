@@ -31,8 +31,11 @@ module CerberusCore::BaseModels
     # collections via the is_member_of relationship.  Using this method to define
     # that relationship enforces this constraint.  See ContentObject for a
     # description of the arguments.
-    def self.relate_to_parent_collection(rel_name, rel_class = nil)
-      self.relation_asserter(:belongs_to, rel_name, :is_member_of, rel_class)
+    def self.parent_collection_relationship(relationship_name, parent_class = nil)
+      self.relation_asserter(:belongs_to, 
+                             relationship_name, 
+                             :is_member_of, 
+                             parent_class)
     end
 
     # Destroy every content object attached to this CoreRecord

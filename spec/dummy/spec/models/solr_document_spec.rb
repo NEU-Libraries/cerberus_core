@@ -15,12 +15,12 @@ describe SolrDocument do
 
       @collection = Collection.new 
       @collection.depositor = "Will" 
-      @collection.parent_community = @community
+      @collection.community = @community
       @collection.save! 
 
       @core_file = CoreFile.new 
-      @core_file.depositor = "Will" 
-      @core_file.parent = @collection
+      @core_file.depositor  = "Will" 
+      @core_file.collection = @collection
       @core_file.save! 
     end
 

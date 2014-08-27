@@ -20,8 +20,11 @@ module CerberusCore::BaseModels
     # the has_affiliation relationship.  Using this method to define that
     # relationship enforces this constraint.  See ContentObject for an arg 
     # description.
-    def self.relate_to_parent_community(rel_name, rel_class = nil)
-      self.relation_asserter(:belongs_to, rel_name, :has_affiliation, rel_class) 
+    def self.parent_community_relationship(relationship_name, parent_class = nil)
+      self.relation_asserter(:belongs_to, 
+                             relationship_name, 
+                             :has_affiliation, 
+                             parent_class) 
     end
   end
 end

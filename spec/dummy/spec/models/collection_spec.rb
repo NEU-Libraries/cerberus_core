@@ -13,8 +13,8 @@ describe Collection do
     after(:each) { collection.destroy if collection.persisted? }  
 
     it "can be attached" do 
-      collection.parent_collection = @parent
-      expect(collection.parent_collection).to eq(@parent) 
+      collection.collection = @parent
+      expect(collection.collection).to eq(@parent) 
     end
 
     after(:all) { @parent.destroy } 
@@ -28,22 +28,22 @@ describe Collection do
 
       @child_col = Collection.new()
       @child_col.depositor = "Will" 
-      @child_col.parent_collection = @ancestor 
+      @child_col.collection = @ancestor 
       @child_col.save! 
 
       @child_file = CoreFile.new()
-      @child_file.depositor = "Will" 
-      @child_file.parent = @ancestor 
+      @child_file.depositor  = "Will" 
+      @child_file.collection = @ancestor 
       @child_file.save!
 
       @descendent_kol = Collection.new()
       @descendent_kol.depositor = "Will" 
-      @descendent_kol.parent_collection = @child_col 
+      @descendent_kol.collection = @child_col 
       @descendent_kol.save!
 
       @descendent_file = CoreFile.new()
-      @descendent_file.depositor = "Will" 
-      @descendent_file.parent = @descendent_kol
+      @descendent_file.depositor  = "Will" 
+      @descendent_file.collection = @descendent_kol
       @descendent_file.save!
 
       @random_file = CoreFile.new()

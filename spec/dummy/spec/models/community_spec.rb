@@ -7,17 +7,17 @@ describe Community do
       @community = Community.create 
 
       @kid_comm = Community.new
-      @kid_comm.parent_community = @community
+      @kid_comm.community = @community
       @kid_comm.save! 
 
       @kid_col = Collection.new 
       @kid_col.depositor = "Will" 
-      @kid_col.parent_community = @community 
+      @kid_col.community = @community 
       @kid_col.save! 
 
       @des_file = CoreFile.new 
-      @des_file.depositor = "Will" 
-      @des_file.parent = @kid_col
+      @des_file.depositor  = "Will" 
+      @des_file.collection = @kid_col
       @des_file.save!
     end
 
