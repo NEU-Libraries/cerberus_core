@@ -20,11 +20,13 @@ Gem::Specification.new do |s|
   s.add_dependency "hydra-derivatives", "0.0.8"
   s.add_dependency "jettywrapper", "= 1.4.1"
   s.add_dependency "curb"
+  s.add_dependency "noid"
 
   s.add_development_dependency "jettywrapper", "= 1.4.1"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec"
+  s.add_development_dependency "noid"
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 end
