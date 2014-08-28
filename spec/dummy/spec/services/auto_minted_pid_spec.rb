@@ -29,4 +29,12 @@ describe CerberusCore::Concerns::AutoMintedPid do
       expect(test.pid).to include "testtest"
     end
   end
+
+  context "With auto generation disabled" do 
+    before(:each) { config.cerberus_core.auto_generate_pid = false }
+
+    it "doesn't auto generate a pid" do 
+      expect(test.pid).to eq nil
+    end
+  end
 end
