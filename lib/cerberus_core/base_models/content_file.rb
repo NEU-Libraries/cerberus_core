@@ -8,6 +8,7 @@ module CerberusCore::BaseModels
     include CerberusCore::Concerns::FileContentDatastreamDelegations
     include CerberusCore::Concerns::Characterizable
     include CerberusCore::Concerns::Relatable
+    include CerberusCore::Concerns::AutoMintedPid
 
     has_metadata name: 'DC', type: CerberusCore::Datastreams::DublinCoreDatastream
     has_metadata name: 'rightsMetadata', type: CerberusCore::Datastreams::ParanoidRightsDatastream

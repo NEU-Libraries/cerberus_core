@@ -10,6 +10,7 @@ module CerberusCore::BaseModels
     include CerberusCore::Concerns::PropertiesDatastreamDelegations
     include CerberusCore::Concerns::Relatable
     include CerberusCore::Concerns::Traversals
+    include CerberusCore::Concerns::AutoMintedPid
 
     before_destroy :destroy_content_objects
 
