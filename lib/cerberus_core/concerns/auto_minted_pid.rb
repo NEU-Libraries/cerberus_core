@@ -11,8 +11,7 @@ module CerberusCore::Concerns::AutoMintedPid
     def mint_pid
       if Rails.configuration.cerberus_core.auto_generate_pid
         if !(self.persisted?)
-          pid = CerberusCore::Services::IdService.mint
-          self.instance_variable_set(:@pid, pid)
+          self.send(:assign_pid)
         end
       end
     end

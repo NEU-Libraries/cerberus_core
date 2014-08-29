@@ -13,20 +13,19 @@ describe CerberusCore::Concerns::AutoMintedPid do
   context "With auto generation enabled" do 
     # Ensure valid configuration is always set for each of these tests
     before(:each) do 
-      config.cerberus_core.auto_generate_pid = true 
-      config.cerberus_core.minter_statefile  = Rails.root.join("tmp", "minter-state")
-      config.cerberus_core.noid_template     = '.reeddeeddk'
+      config.cerberus_core.auto_generate_pid = true
     end
 
-    it "raises an exception if no id_namespace has been set" do 
-      config.cerberus_core.id_namespace = nil 
-      expect { MintedPidTest.new }.to raise_error CerberusCore::InvalidConfigurationError
-    end
-
-    it "generates a valid pid if properly configured" do 
-      config.cerberus_core.id_namespace = "testtest"
+    it "generates a pid on create" do 
       expect { MintedPidTest.new }.not_to raise_error 
-      expect(test.pid).to include "testtest"
+      expect(test.pid).to include "changeme:"
+    end
+
+    it "doesn't change the pid of already persisted objects" do 
+      original_pid = test.pid
+      test.save!
+      new_instantiation = MintedPidTest.find(original_pid)
+      expect(new_instantiation.pid).to eq original_pid 
     end
   end
 
