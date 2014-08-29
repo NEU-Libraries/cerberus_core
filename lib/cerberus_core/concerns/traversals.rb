@@ -8,7 +8,7 @@
 #   :query_result, which simply returns the array of solr responses
 #   retrieved by ActiveFedora::SolrService.query().  Other options are
 #   :models, which casts each result to its fedora object model, and 
-#   :solr_document, which returns an array of SolrDocuments. 
+#   :solr_documents, which returns an array of SolrDocuments. 
 module CerberusCore::Concerns::Traversals
   # Creates a new QueryService object from the given object. 
   # Ought to know how to create from a fedora level model, 
