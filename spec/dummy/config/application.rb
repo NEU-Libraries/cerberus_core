@@ -52,6 +52,9 @@ module Dummy
     # like if you have constraints or database-specific column types
     # config.active_record.schema_format = :sql
 
+    # Default autogeneration of AF pids on object creation to false 
+    config.cerberus_core.auto_generate_pid = false
+
     # Enable the asset pipeline
     config.assets.enabled = true
 
