@@ -14,6 +14,14 @@ module CerberusCore::SolrDocumentBehavior
     end
   end
 
+  #---------------
+  # General stuff
+  #---------------
+
+  def klass
+    unique_read "active_fedora_model_ssi" 
+  end
+
   #-----------------------
   # Mods Datastream Stuff 
   #-----------------------
@@ -86,16 +94,12 @@ module CerberusCore::SolrDocumentBehavior
     Array(self[Ability.edit_user_field])
   end
 
-  def is_public?
-    read_groups.include? 'public'
-  end
-
-  def is_registered?
-    read_groups.include? 'registered' 
-  end
-
-  def is_private?
-    !is_public? && !is_registered?
+  def mass_permissions
+    if read_groups.include? 'public'
+      'public'
+    else
+      'private'
+    end
   end
 
   #---------

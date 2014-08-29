@@ -15,12 +15,12 @@ describe SolrDocument do
 
       @collection = Collection.new 
       @collection.depositor = "Will" 
-      @collection.parent_community = @community
+      @collection.community = @community
       @collection.save! 
 
       @core_file = CoreFile.new 
-      @core_file.depositor = "Will" 
-      @core_file.parent = @collection
+      @core_file.depositor  = "Will" 
+      @core_file.collection = @collection
       @core_file.save! 
     end
 
@@ -46,16 +46,18 @@ describe SolrDocument do
     pending "Figure out how people access the mods ds."
   end
 
+  describe "System info access" do 
+    it "allows us to get the fedora model of this object" do 
+      expect(doc.klass).to eq "CoreFile"
+    end
+  end
+
   describe "Rights metadata access" do 
     it "allows us to check an object's mass permissions" do
-      expect(doc.is_private?).to be true
+      expect(doc.mass_permissions).to eq "private"
 
       core_file.permissions({group: "public"}, "read")
-      expect(doc.is_public?).to be true 
-
-      core_file.permissions({group: "public"}, "none") 
-      core_file.permissions({group: "registered"}, "read")
-      expect(doc.is_registered?).to be true 
+      expect(doc.mass_permissions).to eq "public"
     end
 
     it "allows us to see an object's read users" do 

@@ -4,20 +4,23 @@ module CerberusCore::BaseModels
   # metadata related to any number of content objects (defined in 
   # CerberusCore::ContentObject) attached to them via the standard isPartOf
   # relationship.  Core records can belong to collections.
-  class CoreRecord < ActiveFedora::Base
+  class CoreFile < ActiveFedora::Base
     include CerberusCore::Concerns::ParanoidRightsValidation
     include CerberusCore::Concerns::ParanoidRightsDatastreamDelegations
     include CerberusCore::Concerns::PropertiesDatastreamDelegations
     include CerberusCore::Concerns::Relatable
     include CerberusCore::Concerns::Traversals
+    include CerberusCore::Concerns::AutoMintedPid
 
     before_destroy :destroy_content_objects
 
-    # Every CoreRecord class should specify an array of model names
-    # as strings for the content objects that can exist off this CoreRecord.
-    # E.g. a CoreRecord class that has AudioFile and VideoFile content object
-    # children would specify CONTENT_CLASSES = ["AudioFile", "VideoFile"]
-    CONTENT_CLASSES = nil
+    def content_objects(opts = {})
+      new_query.get_content_objects opts 
+    end
+
+    def canonical_object(opts = {})
+      new_query.get_canonical_object opts 
+    end
 
     # Default datastreams 
     has_metadata name: "DC", type: CerberusCore::Datastreams::DublinCoreDatastream
@@ -29,8 +32,11 @@ module CerberusCore::BaseModels
     # collections via the is_member_of relationship.  Using this method to define
     # that relationship enforces this constraint.  See ContentObject for a
     # description of the arguments.
-    def self.relate_to_parent_collection(rel_name, rel_class = nil)
-      self.relation_asserter(:belongs_to, rel_name, :is_member_of, rel_class)
+    def self.parent_collection_relationship(relationship_name, parent_class = nil)
+      self.relation_asserter(:belongs_to, 
+                             relationship_name, 
+                             :is_member_of, 
+                             parent_class)
     end
 
     # Destroy every content object attached to this CoreRecord
