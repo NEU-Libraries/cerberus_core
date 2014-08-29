@@ -10,6 +10,7 @@ module CerberusCore::BaseModels
     include CerberusCore::Concerns::HasCollections
     include CerberusCore::Concerns::HasCommunities
     include CerberusCore::Concerns::HasCoreFiles
+    include CerberusCore::Concerns::AutoMintedPid
 
     has_metadata name: 'DC', type: CerberusCore::Datastreams::DublinCoreDatastream
     has_metadata name: 'rightsMetadata', type: CerberusCore::Datastreams::ParanoidRightsDatastream
