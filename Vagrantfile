@@ -41,7 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Runs configuration required to get the dummy application up and going so that 
   # we can test what we're doing. 
-  config.vm.provision "shell", path: "spec/dummy/script/vagrant_provisioning.sh", privileged: false
+  config.vm.provision "shell", path: "provisioning.sh", privileged: false
 
   config.vm.synced_folder ".", "/home/vagrant/cerberus_core", nfs: true 
 
