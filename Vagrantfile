@@ -9,6 +9,10 @@ VAGRANT_DEFAULT_PROVIDER = "vmware_fusion"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config| 
 
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
+
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "chef/centos-6.5" 
 
