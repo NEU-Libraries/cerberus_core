@@ -29,14 +29,12 @@ module CerberusCore::Services
       end
     end
 
-    # Assuming a well formed graph of Communities/Collections/CoreRecords,
-    # returns the immediate descendents of the object identified by pid.
+    # See Traversals.
     def get_children(as = :models)
       query_with_models(:all, as)
     end
 
-    # Assuming a well formed graph of Communities/Collections/CoreRecords,
-    # returns all descendents for the object identified by pid.
+    # See Traversals.
     def get_descendents(as = :models) 
       results = query_with_models(:all, :query_result)
 
@@ -147,6 +145,7 @@ module CerberusCore::Services
       parse_return_statement(as, qr) 
     end
 
+    #:nodoc:
     def parse_return_statement(as, results) 
       if [:query_result, :query_results, :raw, :raws].include? as
         return results 
