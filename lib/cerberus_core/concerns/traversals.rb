@@ -62,4 +62,12 @@ module CerberusCore::Concerns::Traversals
   def descendent_communities(opts)
     new_query.get_descendent_communities opts
   end
+
+  def canonical_object(opts)
+    new_query.get_canonical_object opts 
+  end
+
+  def content_objects(opts)
+    new_query.get_content_objects opts 
+  end
 end

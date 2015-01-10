@@ -97,6 +97,7 @@ module CerberusCore::Services
     # at a CoreRecord type object, or just one with no content, 
     # return nil. 
     def get_canonical_object(opts = {})
+      opts = initialize_opts opts
       intermediate = get_content_objects(:return_as => :query_result) 
       intermediate.keep_if { |x| x["canonical_tesim"] == ['yes'] }
       parse_return_statement(opts[:return_as], intermediate).first
