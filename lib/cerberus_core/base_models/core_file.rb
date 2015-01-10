@@ -14,14 +14,6 @@ module CerberusCore::BaseModels
 
     before_destroy :destroy_content_objects
 
-    def content_objects(opts = {})
-      new_query.get_content_objects opts 
-    end
-
-    def canonical_object(opts = {})
-      new_query.get_canonical_object opts 
-    end
-
     # Default datastreams 
     has_metadata name: "DC", type: CerberusCore::Datastreams::DublinCoreDatastream
     has_metadata name: "mods", type: CerberusCore::Datastreams::ModsDatastream
@@ -41,7 +33,7 @@ module CerberusCore::BaseModels
 
     # Destroy every content object attached to this CoreRecord
     def destroy_content_objects
-      content_objects(:return_as => :models).map { |x| x.destroy } 
+      content_objects.map { |x| x.destroy } 
     end
   end
 end

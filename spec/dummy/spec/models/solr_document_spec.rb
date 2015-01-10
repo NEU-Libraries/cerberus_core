@@ -25,11 +25,11 @@ describe SolrDocument do
     end
 
     it "can be run" do 
-      expect(@community.children(:return_as => :models)).to match_array [@collection]  
+      expect(@community.children).to match_array [@collection]  
     end
 
     it "can return other SolrDocuments" do 
-      result = @community.descendents(:return_as => :solr_documents) 
+      result = @community.descendents(:solr_docs)
 
       expect(result.map{|x| x.class.name}).to match_array ["SolrDocument", "SolrDocument"]
       expect(result.map{|x| x["id"]}).to match_array [@collection.pid, @core_file.pid]

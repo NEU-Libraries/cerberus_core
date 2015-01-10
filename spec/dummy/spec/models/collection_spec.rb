@@ -1,23 +1,38 @@
 require 'spec_helper' 
 
 describe Collection do    
-  describe "Parent Folder" do 
-    before(:all) do 
-      @parent = Collection.new 
-      @parent.depositor = "Will" 
-      @parent.save! 
+  describe "Parent Queries" do 
+    context "With parent collection" do 
+      before(:all) do 
+        @parent = Collection.new(:depositor => "Will") 
+        @parent.save! 
+
+        @child = Collection.new(:depositor => "Will")
+        @child.collection = @parent
+        @child.save!
+      end
+      
+      after(:all) { ActiveFedora::Base.delete_all } 
+      subject(:child) { @child } 
+
+      its(:collection) { should eq @parent }
+      its(:community)  { should be nil } 
     end
 
-    let(:collection) { Collection.new }
+    context "With parent community" do 
+      before(:all) do 
+        @parent = Community.new(:depositor => "Will") ; @parent.save! 
+        @child = Collection.new(:depositor => "Will")
+        @child.community = @parent 
+        @child.save! 
+      end
+      
+      after(:all) { ActiveFedora::Base.delete_all }
+      subject(:child) { @child }
 
-    after(:each) { collection.destroy if collection.persisted? }  
-
-    it "can be attached" do 
-      collection.collection = @parent
-      expect(collection.collection).to eq(@parent) 
+      its(:collection) { should be nil } 
+      its(:community)  { should eq @parent } 
     end
-
-    after(:all) { @parent.destroy } 
   end
 
   describe "Queries" do 
@@ -56,44 +71,38 @@ describe Collection do
     end
 
     it "can find children" do 
-      expected = [@child_col, @child_file] 
-
-      expect(@ancestor.children(:return_as => :models)).to match_array expected 
+      expect(@ancestor.children).to match_array [@child_col, @child_file] 
     end
 
     it "returns an empty array when no children exist" do 
-      expect(@random_kol.children(:return_as => :models)).to match_array [] 
+      expect(@random_kol.children).to match_array [] 
     end
 
     it "can find children who are records" do 
-      expected  = [@child_file] 
-
-      expect(@ancestor.records(:return_as => :models)).to match_array expected
+      expect(@ancestor.records).to match_array [@child_file]
     end
 
     it "can find children who are collections" do 
-      expected = [@child_col]
-      expect(@ancestor.collections(:return_as => :models)).to match_array expected
+      expect(@ancestor.collections).to match_array [@child_col]
     end
 
     it "can find all descendents" do 
       expected = [@child_col, @child_file, @descendent_file, @descendent_kol]
-      expect(@ancestor.descendents(:return_as => :models)).to match_array expected 
+      expect(@ancestor.descendents).to match_array expected 
     end
 
     it "can find all descendents who are records" do
       expected = [@child_file, @descendent_file]
-      expect(@ancestor.descendent_records(:return_as => :models)).to match_array expected
+      expect(@ancestor.descendent_records).to match_array expected
     end 
 
     it "can find all descendents who are collections" do 
       expected = [@child_col, @descendent_kol]
-      expect(@ancestor.descendent_collections(:return_as => :models)).to match_array expected
+      expect(@ancestor.descendent_collections).to match_array expected
     end
 
     after(:all) do 
-      @ancestor.destroy ; @child_col.destroy ; @child_file.destroy
-      @random_file.destroy ; @descendent_kol.destroy ; @descendent_file.destroy  
+      ActiveFedora::Base.delete_all
     end
   end
 
