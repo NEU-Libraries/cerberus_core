@@ -1,29 +1,37 @@
 require 'spec_helper'
 
 describe CoreFile do 
+  describe "Parent collections" do 
+    before(:all) do 
+      @parent = Collection.create(depositor: "Will") 
+      @core   = CoreFile.create(depositor: "Will", collection: @parent)
+    end
+
+    after(:all) { ActiveFedora::Base.delete_all } 
+
+    subject(:core) { @core } 
+
+    its(:collection) { should eq @parent } 
+  end
+
   describe "Content Objects" do 
     before :all do 
-      @core = CoreFile.new 
-      @core.depositor =  "Will" 
-      @core.save! 
+      @core = CoreFile.create(depositor: "Will") 
 
-      @wigwum  = Wigwum.new 
-      @wigwum.core_file = @core 
-      @wigwum.save!
-
-      @wumpus  = Wumpus.new
-      @wumpus.core_file = @core 
+      @wigwum  = Wigwum.create(core_file: @core)
+      
+      @wumpus  = Wumpus.new(core_file: @core)
       @wumpus.canonize
       @wumpus.save! 
 
       @wigwum2 = Wigwum.create 
     end
 
-    it "can be found in various ways" do 
-      expected = [@wigwum, @wumpus] 
+    after(:all) { ActiveFedora::Base.delete_all } 
 
-      expect(@core.content_objects(:return_as => :models)).to match_array expected 
-      expect(@core.canonical_object(:return_as => :models)).to eq @wumpus
+    it "can be found in various ways" do 
+      expect(@core.content_objects).to match_array [@wigwum, @wumpus]
+      expect(@core.canonical_object).to eq @wumpus
     end
 
     it "are destroyed on core record destruction" do 
@@ -34,10 +42,6 @@ describe CoreFile do
 
       expect(Wumpus.exists?(wumpus_pid)).to be false 
       expect(Wigwum.exists?(wigwum_pid)).to be false 
-    end
-
-    after :all do 
-      @wigwum2.destroy
     end
   end
 

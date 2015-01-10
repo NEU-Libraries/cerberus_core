@@ -33,7 +33,7 @@ module CerberusCore::BaseModels
 
     # Destroy every content object attached to this CoreRecord
     def destroy_content_objects
-      content_objects(:return_as => :models).map { |x| x.destroy } 
+      content_objects.map { |x| x.destroy } 
     end
   end
 end

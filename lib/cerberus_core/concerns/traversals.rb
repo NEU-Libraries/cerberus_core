@@ -18,56 +18,56 @@ module CerberusCore::Concerns::Traversals
   end
 
   # Fetch all children (immediate descendents) of this fedora object.
-  def children(opts)
-    new_query.get_children opts
+  def children(as = :models)
+    new_query.get_children as
   end
 
   # Fetch all descendents of this fedora object.
-  def descendents(opts) 
-    new_query.get_descendents opts 
+  def descendents(as = :models) 
+    new_query.get_descendents as 
   end
 
   # Fetch all children which are named in CORE_RECORD_CLASSES
   # for this fedora object.
-  def records(opts) 
-    new_query.get_child_records opts
+  def records(as = :models) 
+    new_query.get_child_records as
   end
 
   # Fetch all descendents which are named in CORE_RECORD_CLASSES
   # for this fedora object.
-  def descendent_records(opts) 
-    new_query.get_descendent_records opts 
+  def descendent_records(as = :models) 
+    new_query.get_descendent_records as 
   end
 
   # Fetch all children which are named in COLLECTION_CLASSES
   # for this fedora object.
-  def collections(opts) 
-    new_query.get_child_collections opts 
+  def collections(as = :models) 
+    new_query.get_child_collections as 
   end
 
   # Fetch all descendents which are named in COLLECTION_CLASSES
   # for this fedora object.
-  def descendent_collections(opts) 
-    new_query.get_descendent_collections opts 
+  def descendent_collections(as = :models) 
+    new_query.get_descendent_collections as 
   end
 
   # Fetch all children which are named in COMMUNITY_CLASSES
   # for this fedora object.
-  def communities(opts) 
-    new_query.get_child_communities opts
+  def communities(as = :models) 
+    new_query.get_child_communities as
   end
 
   # Fetch all descendents which are named in COMMUNITY_CLASSES
   # for this fedora object.
-  def descendent_communities(opts)
-    new_query.get_descendent_communities opts
+  def descendent_communities(as = :models)
+    new_query.get_descendent_communities as
   end
 
-  def canonical_object(opts)
-    new_query.get_canonical_object opts 
+  def canonical_object(as = :models)
+    new_query.get_canonical_object as 
   end
 
-  def content_objects(opts)
-    new_query.get_content_objects opts 
+  def content_objects(as = :models)
+    new_query.get_content_objects as 
   end
 end
