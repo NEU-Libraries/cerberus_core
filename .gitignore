@@ -14,6 +14,9 @@ spec/dummy/tmp/
 spec/dummy/.sass-cache
 .vagrant/
 
+# Ignore .swp files 
+**.swp
+
 # Ignore .ruby-version because that should be specified by Gem::Specification for actual end users
 .ruby-version
 
