@@ -22,6 +22,10 @@ module CerberusCore::SolrDocumentBehavior
     unique_read "active_fedora_model_ssi" 
   end
 
+  def pid 
+    unique_read "id" 
+  end
+
   #-----------------------
   # Mods Datastream Stuff 
   #-----------------------

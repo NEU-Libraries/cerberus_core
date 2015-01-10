@@ -50,6 +50,12 @@ describe SolrDocument do
     it "allows us to get the fedora model of this object" do 
       expect(doc.klass).to eq "CoreFile"
     end
+
+    it "allows us to get the pid of this object" do 
+      # Have to persist the core file for it to have a pid
+      core_file.depositor = "will" ; core_file.save!
+      expect(doc.pid).to eq core_file.pid 
+    end
   end
 
   describe "Rights metadata access" do 
