@@ -302,6 +302,3 @@ DEPENDENCIES
   rspec
   rspec-its
   sqlite3
-
-BUNDLED WITH
-   1.10.1

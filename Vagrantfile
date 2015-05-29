@@ -38,7 +38,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", '5734']
     vb.customize ["modifyvm", :id, "--ioapic", 'on']
-    vb.customize ["modifyvm", :id, "--cpus", '6']
+    vb.customize ["modifyvm", :id, "--cpus", '4']
     vb.customize ["modifyvm", :id, "--natdnsproxy1", "off"]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "off"]
   end
@@ -47,7 +47,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # we can test what we're doing. 
   config.vm.provision "shell", path: "provisioning.sh", privileged: false
 
-  config.vm.synced_folder ".", "/home/vagrant/cerberus_core", nfs: true 
+  config.vm.synced_folder ".", "/vagrant", :type => "nfs"
 
   config.vm.network "private_network", ip: "192.168.3.3"
 end
