@@ -110,7 +110,8 @@ module CerberusCore::Services
         affiliation_with = "has_affiliation_ssim:#{full_pid}"
 
         query   = "#{models} AND (#{member_of} OR #{affiliation_with})"
-        results = ActiveFedora::SolrService.query(query, rows: 999) 
+        row_count = ActiveFedora::SolrService.count(query)
+        results = ActiveFedora::SolrService.query(query, rows: row_count) 
 
         parse_return_statement(as, results)
       else
