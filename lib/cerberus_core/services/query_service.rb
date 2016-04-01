@@ -84,7 +84,8 @@ module CerberusCore::Services
     # return an empty array.
     def get_content_objects(as = :models) 
       query   = "is_part_of_ssim:#{full_pid}"
-      results = ActiveFedora::SolrService.query(query, rows: 999)
+      row_count = ActiveFedora::SolrService.count(query)
+      results = ActiveFedora::SolrService.query(query, rows: row_count)
       parse_return_statement(as, results)
     end
 
